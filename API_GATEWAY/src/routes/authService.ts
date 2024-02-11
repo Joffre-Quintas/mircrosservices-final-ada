@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import HandleAuthService from '../handlers/HandlerAuthSession'
-import { verifySessionSchema } from '../middlewares/validations/schemas/verify.Session.schema'
-import { createSessionSchema } from '../middlewares/validations/schemas/createSession.schema'
+import { verifySessionSchema } from '../schemas/verify.Session.schema'
+import { createSessionSchema } from '../schemas/createSession.schema'
 
-import validations from '../middlewares/validations/validation'
+import validations from '../middlewares/validation'
 
 const routerAuthService = Router()
 
