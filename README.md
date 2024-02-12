@@ -7,6 +7,7 @@ Projeto de micros serviços final ada
 ## 👨🏻‍💻 Executado por
 
 Rodigo Bueno Wecoski ---> <https://github.com/Rodrigobuenow>
+Joffre Quintas --->
 
 ## 📋 Kanban do grupo
 
