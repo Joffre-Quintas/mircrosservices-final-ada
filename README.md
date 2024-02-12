@@ -4,6 +4,9 @@
 ## ➡️ Descrição do Projeto 
 #### descrever aqui
 
+## <img style="border-radius: 50%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCbxqxKJSQQAt15IcRG5QHAy-kP2IA2fr6iQ&s" width="20px;" alt=""/> Trello do Projeto
+####  <a href="https://trello.com/b/wRS0Exxu/ada-food"> Quadro do projeto 
+
 ## 🔗 Link do Projeto
 #### colocar aqui
 
