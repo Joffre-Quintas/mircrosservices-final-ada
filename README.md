@@ -4,6 +4,7 @@
 ## 📚 Descrição
 
 Projeto de micros serviços final ada
+Joffre Quintas --->
 
 ## 📋 Kanban do grupo
 
