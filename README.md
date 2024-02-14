@@ -1,11 +1,13 @@
 # 🍕 ADA FOOD
 ### Projeto de microsserviço desenvolvido durante curso da Ada Tech
 
-## ➡️ Descrição do Projeto 
-#### descrever aqui
+## 📚 Descrição
 
-## <img style="border-radius: 50%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCbxqxKJSQQAt15IcRG5QHAy-kP2IA2fr6iQ&s" width="20px;" alt=""/> Trello do Projeto
-####  <a href="https://trello.com/b/wRS0Exxu/ada-food"> Quadro do projeto 
+Projeto de micros serviços final ada
+
+## 📋 Kanban do grupo
+
+Trello ---> <https://trello.com/b/wRS0Exxu/ada-food>
 
 ## 🔗 Link do Projeto
 #### colocar aqui
@@ -16,6 +18,22 @@
 ## 🛠️ Tecnologias
 #### As seguintes ferramentas foram usadas na construção do projeto:
 - primeira
+
+## 🛠️ Instalação
+
+```bash
+npm i
+```
+
+## 🏃 Para rodar os Testes
+
+```bash
+npm
+```
+
+## 👨🏻‍🏫 Professor
+
+Esdras Aguilar ---> <https://github.com/esdrasac>
 
 ## 👥 Autores
 <!-- Anderson -->
