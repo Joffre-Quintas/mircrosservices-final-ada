@@ -7,7 +7,7 @@ import validations from '../middlewares/validation'
 
 const routerAuthService = Router()
 
-routerAuthService.post('/createSession', validations(createSessionSchema), HandleAuthService.createSession)
-routerAuthService.post('/verifySession', validations(token), HandleAuthService.verifySession)
+routerAuthService.post('/create-session', validations(createSessionSchema), HandleAuthService.createSession)
+routerAuthService.post('/verify-session', validations(token), HandleAuthService.verifySession)
 
 export default routerAuthService
