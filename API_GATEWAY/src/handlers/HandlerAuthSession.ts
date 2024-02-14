@@ -15,7 +15,7 @@ class HandlerAuthService {
         } catch (error: any) {
             return res
                 .status(error.response?.status || 500)
-                .json({ error: error.response?.data?.error || 'Server error' })
+                .json({ message: error.response?.data?.message || 'Server error!' })
         }
     }
 
