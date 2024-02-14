@@ -12,16 +12,8 @@ export const resMockFactory = () => {
         json: jest.fn().mockReturnThis()
     } as unknown as Response
 }
-export const erroAxiosFactory = (status: number, message: string) => {
-    return {
-        error: {
-            reponse: {
-                status: status,
-                data: {
-                    error: message
-                }
-            }
-        }
-    }
+
+export const errorFactory = (message: string) => {
+    return new Error(message)
 }
 export const nextMock = jest.fn()
