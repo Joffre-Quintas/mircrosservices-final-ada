@@ -1,5 +1,6 @@
-export type TUserData = {
-  id?: string
+// user
+export type TUser = {
+  id: string
   name: string
   email: string
   cpf: string
@@ -11,14 +12,32 @@ export type TUserData = {
   password: string
 }
 
-export type TUser = {
-  id: string
-} & TUserData
-
-export interface IUserRepository {
-  createUser: (data: TUserData) => Promise<TUser>
+// create user
+export type TCreateUserDTO = Omit<TUser, 'id'> & {
+  confirmPassword: string
 }
 
+export type TCreateUserResponse = Pick<TUser, 'name' | 'email' | 'cpf'>
+
+// repositories
+export interface IUserRepository {
+  createUser: (data: TCreateUserDTO) => Promise<TUser>
+  deleteAllUsers: () => Promise<void>
+  findByCPF: (cpf: string) => Promise<TUser>
+}
+
+// services
+// type TCreateUserResponse = { data: Omit<TCreateUserDTO, TUser['password'] & TUser['password']> }
 export interface IServiceCreateUser {
-  execute: (data: TUserData) => Promise<TUserData>
+  execute: (data: TCreateUserDTO) => Promise<Partial<TCreateUserResponse>>
+}
+export interface IServiceDeleteAllUsers {
+  execute: () => Promise<void>
+}
+
+// exceptions
+export interface IException {
+  message: string
+  status: number
+  name: string
 }

@@ -6,6 +6,6 @@ import validations from '../middlewares/validation'
 
 const createUser = Router()
 
-createUser.post('/createUser', validations(createUserSchema), AplicationController.createUser)
+createUser.post('/create-user', validations(createUserSchema), AplicationController.createUser)
 
 export default createUser

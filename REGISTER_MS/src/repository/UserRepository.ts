@@ -1,5 +1,6 @@
 import { database } from '../../databaseMock/database'
-import { TUser, TUserData } from '../models/UserTypes'
+import { UserNotFoundException } from '../exceptions/Exceptions'
+import { TUser, TCreateUserDTO } from '../models/UserTypes'
 import { IUserRepository } from '../models/UserTypes'
 
 // database mock é um banco de dados em memória
@@ -16,14 +17,28 @@ export class UserRepository implements IUserRepository {
     ).toString()
   }
 
-  public async createUser(data: TUserData): Promise<TUser> {
-    
+  public async createUser(data: TCreateUserDTO): Promise<TUser> {
     const user = {
-      id: this.generateId(),
-      ...data
+      ...data,
+      id: this.generateId()
     }
 
-    database.users.push(user)
+    const dbResponse = database.users.push(user)
+    console.log('UserRepository.createUser -> user', user)
+
+    if (dbResponse) return Promise.resolve(user)
+    throw dbResponse
+  }
+
+  public async findByCPF(cpf: string): Promise<TUser> {
+    const user = database.users.find((user) => user.cpf === cpf)
+
+    if (!user) throw new UserNotFoundException()
+
     return Promise.resolve(user)
+  }
+
+  public async deleteAllUsers(): Promise<void> {
+    database.users = []
   }
 }
