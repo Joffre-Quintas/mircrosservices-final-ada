@@ -7,7 +7,7 @@ import { errorFactory, reqMockFactory, resMockFactory } from '../../../../mocks'
 
 jest.mock('axios')
 
-describe('HandlerAuthSession', () => {
+describe('HandlerAuthSession suit', () => {
     const reqMock: any = reqMockFactory({
         email: 'email@mail.com',
         password: 'senha'
@@ -17,60 +17,63 @@ describe('HandlerAuthSession', () => {
 
     const resMock = resMockFactory()
 
-    it('When call createSession axios.post should be called', async () => {
-        await HandlerAuthService.createSession(reqMock, resMock)
+    describe('CreateSession', () => {
+        it('When call createSession axios.post should be called', async () => {
+            await HandlerAuthService.createSession(reqMock, resMock)
 
-        expect(axios.post).toHaveBeenCalledTimes(1)
-        expect(axios.post).toHaveBeenCalledWith(`${process.env.AUTH_SERVICE_URL}/createSession`, reqMock.body)
+            expect(axios.post).toHaveBeenCalledTimes(1)
+            expect(axios.post).toHaveBeenCalledWith(`${process.env.AUTH_SERVICE_URL}/create-session`, reqMock.body)
+        })
+        it('createSession should be return an object = { token: string }', async () => {
+            jest.spyOn(axios, 'post').mockResolvedValueOnce({ data: { token: 'asdadsadasda' } })
+
+            await HandlerAuthService.createSession(reqMock, resMock)
+
+            expect(resMock.status).toHaveBeenLastCalledWith(200)
+            expect(resMock.json).toHaveBeenCalledWith({ token: expect.any(String) })
+        })
+        it('createSession should be return an Error when has server problem', async () => {
+            jest.spyOn(axios, 'post').mockRejectedValueOnce(errorFactory('Server error'))
+
+            await HandlerAuthService.createSession(reqMock, resMock)
+
+            expect(resMock.status).toHaveBeenLastCalledWith(500)
+            expect(resMock.json).toHaveBeenCalledWith({ error: expect.any(String) })
+        })
     })
-    it('createSession should be return an object = { token: string }', async () => {
-        jest.spyOn(axios, 'post').mockResolvedValueOnce({ data: { token: 'asdadsadasda' } })
+    describe('verifySession', () => {
+        it('When call verifySession axios.post should be called', async () => {
+            await HandlerAuthService.verifySession(reqMockToken, resMock)
 
-        await HandlerAuthService.createSession(reqMock, resMock)
+            expect(axios.post).toHaveBeenCalledTimes(1)
+            expect(axios.post).toHaveBeenCalledWith(
+                `${process.env.AUTH_SERVICE_URL}/verify-session`,
+                reqMockToken.body.token
+            )
+        })
+        it('verifySession should be return a true when exist', async () => {
+            jest.spyOn(axios, 'post').mockResolvedValueOnce({ data: true })
 
-        expect(resMock.status).toHaveBeenLastCalledWith(200)
-        expect(resMock.json).toHaveBeenCalledWith({ token: expect.any(String) })
-    })
-    it('createSession should be return an Error when has server problem', async () => {
-        jest.spyOn(axios, 'post').mockRejectedValueOnce(errorFactory('Server error'))
+            await HandlerAuthService.verifySession(reqMockToken, resMock)
 
-        await HandlerAuthService.createSession(reqMock, resMock)
+            expect(resMock.status).toHaveBeenLastCalledWith(200)
+            expect(resMock.json).toHaveBeenCalledWith(true)
+        })
+        it('verifySession should be return a false when session is expired or not exist', async () => {
+            jest.spyOn(axios, 'post').mockResolvedValueOnce({ data: false })
 
-        expect(resMock.status).toHaveBeenLastCalledWith(500)
-        expect(resMock.json).toHaveBeenCalledWith({ message: expect.any(String) })
-    })
+            await HandlerAuthService.verifySession(reqMockToken, resMock)
 
-    it('When call verifySession axios.post should be called', async () => {
-        await HandlerAuthService.verifySession(reqMockToken, resMock)
+            expect(resMock.status).toHaveBeenLastCalledWith(200)
+            expect(resMock.json).toHaveBeenCalledWith(false)
+        })
+        it('verifySession should be return an Error when has server problem', async () => {
+            jest.spyOn(axios, 'post').mockRejectedValueOnce(errorFactory('Server error'))
 
-        expect(axios.post).toHaveBeenCalledTimes(1)
-        expect(axios.post).toHaveBeenCalledWith(
-            `${process.env.AUTH_SERVICE_URL}/verifySession`,
-            reqMockToken.body.token
-        )
-    })
-    it('verifySession should be return a true when exist', async () => {
-        jest.spyOn(axios, 'post').mockResolvedValueOnce({ data: true })
+            await HandlerAuthService.createSession(reqMock, resMock)
 
-        await HandlerAuthService.verifySession(reqMockToken, resMock)
-
-        expect(resMock.status).toHaveBeenLastCalledWith(200)
-        expect(resMock.json).toHaveBeenCalledWith(true)
-    })
-    it('verifySession should be return a false when session is expired or not exist', async () => {
-        jest.spyOn(axios, 'post').mockResolvedValueOnce({ data: false })
-
-        await HandlerAuthService.verifySession(reqMockToken, resMock)
-
-        expect(resMock.status).toHaveBeenLastCalledWith(200)
-        expect(resMock.json).toHaveBeenCalledWith(false)
-    })
-    it('verifySession should be return an Error when has server problem', async () => {
-        jest.spyOn(axios, 'post').mockRejectedValueOnce(errorFactory('Server error'))
-
-        await HandlerAuthService.createSession(reqMock, resMock)
-
-        expect(resMock.status).toHaveBeenLastCalledWith(500)
-        expect(resMock.json).toHaveBeenCalledWith({ message: expect.any(String) })
+            expect(resMock.status).toHaveBeenLastCalledWith(500)
+            expect(resMock.json).toHaveBeenCalledWith({ error: expect.any(String) })
+        })
     })
 })
