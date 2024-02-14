@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 import { IServiceCreateUser, IUserRepository } from '../models/UserTypes'
 import { IServiceDeleteAllUsers } from '../models/UserTypes'
-import { UserRepository } from '../repository/UserRepository'
+import { UserRepository } from '../adapters/repository'
 import HandlerCreateUser from '../handlers/HandlerCreateUser'
 import HandlerDeleteAllUsers from '../handlers/HandlerDeleteAllUsers'
-import { ServiceCreateUser } from '../services/ServiceCreateUser'
-import { ServiceDeleteAllUsers } from '../services/ServiceDeleteAllUsers'
+import { ServiceCreateUser } from '../adapters/services'
+import { ServiceDeleteAllUsers } from '../adapters/services'
 
 // repository adapters
 const userRepositoy: IUserRepository = new UserRepository()
