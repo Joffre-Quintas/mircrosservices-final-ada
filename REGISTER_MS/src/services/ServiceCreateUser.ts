@@ -1,29 +1,34 @@
-import { IUserRepository, TUserData } from '../models/UserTypes'
+import { UserAlreadyExistsException } from '../exceptions/Exceptions'
+import { IServiceCreateUser, IUserRepository, TCreateUserDTO, TCreateUserResponse } from '../models/UserTypes'
+import bcrypt from 'bcrypt'
 
-export class ServiceCreateUser {
+export class ServiceCreateUser implements IServiceCreateUser {
   private userRepository: IUserRepository
 
   constructor(userRepository: IUserRepository) {
     this.userRepository = userRepository
   }
 
-  public async execute(data: TUserData): Promise<TUserData> {
-    try {
-      const newUser = await this.userRepository.createUser(data)
+  public async execute(data: TCreateUserDTO): Promise<TCreateUserResponse> {
+    await this.userRepository.findByCPF(data.cpf).then(
+      () => {
+        throw new UserAlreadyExistsException()
+      },
+      () => {}
+    )
 
-      const keysToReturn = ['name', 'email', 'cpf', 'streetNumber', 'neighborhood', 'city', 'state', 'country']
-      const transformedUser: TUserData = Object.assign(
-        Object.entries(newUser).reduce((acc, [key, value]) => {
-          if (!keysToReturn.includes(key)) {
-            return acc
-          }
-          return { ...acc, [key]: value }
-        })
-      )
+    const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS ?? '10'))
+    const hashedPassword = await bcrypt.hash(data.password, salt)
 
-      return transformedUser
-    } catch (error: unknown) {
-      return Promise.reject(error)
-    }
+    console.log('ServiceCreateUser.execute -> salt', {
+      salt,
+      hashedPassword
+    })
+
+    const newUser = await this.userRepository.createUser({ ...data, password: hashedPassword })
+    const transformedUser: TCreateUserResponse = { name: newUser.name, email: newUser.email, cpf: newUser.cpf }
+
+    // console.log('ServiceCreateUser.execute -> transformedUser', transformedUser)
+    return transformedUser
   }
 }

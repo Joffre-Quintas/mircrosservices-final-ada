@@ -12,7 +12,7 @@ export const database = {
       city: '',
       state: '',
       country: '',
-      password: ''
+      password: '',
     }
   ],
   orders: [
@@ -23,10 +23,10 @@ export const database = {
         {
           id: '1',
           name: 'product1',
-          price: 100
+          price: 100,
+          description: 'description'
         }
-      ],
-      description: 'description'
+      ]
     }
   ]
 }
