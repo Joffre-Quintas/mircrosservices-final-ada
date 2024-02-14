@@ -3,7 +3,7 @@
 import axios from 'axios'
 import 'dotenv/config'
 import HandlerAuthService from '../../../../src/handlers/HandlerAuthSession'
-import { erroAxiosFactory, reqMockFactory, resMockFactory } from '../../../../mocks'
+import { errorFactory, reqMockFactory, resMockFactory } from '../../../../mocks'
 
 jest.mock('axios')
 
@@ -31,8 +31,8 @@ describe('HandlerAuthSession', () => {
         expect(resMock.status).toHaveBeenLastCalledWith(200)
         expect(resMock.json).toHaveBeenCalledWith({ token: expect.any(String) })
     })
-    it('createSession should be return an object = { token: string }', async () => {
-        jest.spyOn(axios, 'post').mockRejectedValueOnce(erroAxiosFactory(500, 'Server error'))
+    it('createSession should be return an Error when has server problem', async () => {
+        jest.spyOn(axios, 'post').mockRejectedValueOnce(errorFactory('Server error'))
 
         await HandlerAuthService.createSession(reqMock, resMock)
 
@@ -64,5 +64,13 @@ describe('HandlerAuthSession', () => {
 
         expect(resMock.status).toHaveBeenLastCalledWith(200)
         expect(resMock.json).toHaveBeenCalledWith(false)
+    })
+    it('verifySession should be return an Error when has server problem', async () => {
+        jest.spyOn(axios, 'post').mockRejectedValueOnce(errorFactory('Server error'))
+
+        await HandlerAuthService.createSession(reqMock, resMock)
+
+        expect(resMock.status).toHaveBeenLastCalledWith(500)
+        expect(resMock.json).toHaveBeenCalledWith({ message: expect.any(String) })
     })
 })

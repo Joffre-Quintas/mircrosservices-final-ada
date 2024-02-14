@@ -9,16 +9,13 @@ class HandlerAuthService {
         const dataBody: TCreateSession = req.body
 
         try {
-            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/createSession`, dataBody)
+            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/create-session`, dataBody)
 
             res.status(200).json(data)
-        } catch (error: unknown) {
-            if (axios.isAxiosError(error)) {
-                return res
-                    .status(error.response?.status || 500)
-                    .json({ error: error.response?.data?.error || 'Server error' })
-            }
-            return res.status(500).json({ message: 'Server error' })
+        } catch (error: any) {
+            return res
+                .status(error.response?.status || 500)
+                .json({ error: error.response?.data?.error || 'Server error' })
         }
     }
 
@@ -26,16 +23,13 @@ class HandlerAuthService {
         const dataBody: TToken = req.body
 
         try {
-            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/verifySession`, dataBody.token)
+            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/verify-session`, dataBody.token)
 
             res.status(200).json(data)
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                return res
-                    .status(error.response?.status || 500)
-                    .json({ error: error.response?.data?.error || 'Server error' })
-            }
-            return res.status(500).json({ message: 'Server error' })
+        } catch (error: any) {
+            return res
+                .status(error.response?.status || 500)
+                .json({ error: error.response?.data?.error || 'Server error' })
         }
     }
 }
