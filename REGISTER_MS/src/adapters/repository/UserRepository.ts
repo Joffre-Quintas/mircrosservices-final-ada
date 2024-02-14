@@ -1,7 +1,6 @@
-import { database } from '../../databaseMock/database'
+import { database } from '../../../databaseMock/database'
 import { UserNotFoundException } from '../exceptions/Exceptions'
-import { TUser, TCreateUserDTO } from '../models/UserTypes'
-import { IUserRepository } from '../models/UserTypes'
+import { TUser, TCreateUserDTO, IUserRepository } from '../../models/UserTypes'
 
 // database mock é um banco de dados em memória
 

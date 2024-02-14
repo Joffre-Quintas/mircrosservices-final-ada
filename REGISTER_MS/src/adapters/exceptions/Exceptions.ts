@@ -1,4 +1,4 @@
-import { IException } from '../models/UserTypes'
+import { IException } from '../../models/UserTypes'
 
 class GenericExeption extends Error implements IException {
   public status: number

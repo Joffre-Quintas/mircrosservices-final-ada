@@ -1,5 +1,5 @@
 import { UserAlreadyExistsException } from '../exceptions/Exceptions'
-import { IServiceCreateUser, IUserRepository, TCreateUserDTO, TCreateUserResponse } from '../models/UserTypes'
+import { IServiceCreateUser, IUserRepository, TCreateUserDTO, TCreateUserResponse } from '../../models/UserTypes'
 import bcrypt from 'bcrypt'
 
 export class ServiceCreateUser implements IServiceCreateUser {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import 'dotenv/config'
 import { IServiceCreateUser, TCreateUserDTO } from '../models/UserTypes'
-import { UserException, ServerErrorException } from '../exceptions/Exceptions'
+import { UserException, ServerErrorException } from '../adapters/exceptions'
 
 class HandlerCreateUser {
   private ServiceCreateUser: IServiceCreateUser
