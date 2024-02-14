@@ -1,37 +1,35 @@
 import axios from 'axios'
 import { Request, Response } from 'express'
 import 'dotenv/config'
-import { TVerifySession } from '../schemas/verify.Session.schema'
+import { TToken } from '../schemas/verify.Session.schema'
+import { TCreateSession } from '../schemas/createSession.schema'
 
 class HandlerAuthService {
     static createSession = async (req: Request, res: Response) => {
-        try {
-            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/createSession`, req.body)
+        const dataBody: TCreateSession = req.body
 
-            res.json(data)
-        } catch (error: unknown) {
-            if (axios.isAxiosError(error)) {
-                return res
-                    .status(error.response?.status || 500)
-                    .json({ error: error.response?.data?.error || 'Server error' })
-            }
-            return res.status(500).json({ message: 'Server error' })
+        try {
+            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/create-session`, dataBody)
+
+            res.status(200).json(data)
+        } catch (error: any) {
+            return res
+                .status(error.response?.status || 500)
+                .json({ error: error.response?.data?.error || 'Server error' })
         }
     }
 
     static verifySession = async (req: Request, res: Response) => {
-        const { token } = req.body as TVerifySession
-        try {
-            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/createSession`, token)
+        const dataBody: TToken = req.body
 
-            res.json(data)
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                return res
-                    .status(error.response?.status || 500)
-                    .json({ error: error.response?.data?.error || 'Server error' })
-            }
-            return res.status(500).json({ message: 'Server error' })
+        try {
+            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/verify-session`, dataBody.token)
+
+            res.status(200).json(data)
+        } catch (error: any) {
+            return res
+                .status(error.response?.status || 500)
+                .json({ error: error.response?.data?.error || 'Server error' })
         }
     }
 }
