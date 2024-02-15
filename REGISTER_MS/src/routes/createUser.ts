@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import {AplicationController} from '../controller/aplicationController'
-import { createUserSchema } from '../schemas/createUserSchema.schema'
+import { createUserSchema } from '../schemas/createUser.schema'
 
 import validations from '../middlewares/validation'
 
