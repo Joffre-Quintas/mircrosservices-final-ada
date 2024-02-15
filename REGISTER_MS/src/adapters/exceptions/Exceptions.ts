@@ -7,6 +7,11 @@ class GenericExeption extends Error implements IException {
     super(message)
     this.name = name
     this.status = status || 500
+    this.consoleLog()
+  }
+
+  consoleLog() {
+    console.log(this)
   }
 }
 

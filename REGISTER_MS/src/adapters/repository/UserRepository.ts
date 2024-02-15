@@ -30,35 +30,36 @@ export class PrismaUserRepository implements IUserRepository {
   }
 
   public async createUser(data: TCreateUserDTO): Promise<TUser> {
+    console.log('UserRepository.createUser -> creating')
+
     const dbResponse = await this.prisma.users.create({ data })
 
-    if (dbResponse) {
-      console.log('UserRepository.createUser -> created')
-      return dbResponse
+    if (!dbResponse) {
+      throw dbResponse
     }
-    console.log('UserRepository.createUser -> error', dbResponse)
-    throw dbResponse
+    console.log('UserRepository.createUser -> created')
+    return dbResponse
   }
 
   public async findByCPF(cpf: string): Promise<TUser> {
+    console.log('UserRepository.findByCPF -> finding')
     const dbResponse = await this.prisma.users.findUnique({ where: { cpf: cpf } })
 
     if (!dbResponse) {
-      console.log('UserRepository.findByCPF -> user not found')
       throw new UserNotFoundException()
     }
-    console.log('UserRepository.findByCPF -> user found')
+    console.log('UserRepository.findByCPF -> found')
     return dbResponse
   }
 
   public async deleteAllUsers(): Promise<void> {
+    console.log('UserRepository.deleteAllUsers -> deleting')
     const dbResponse = await this.prisma.users.deleteMany()
 
-    if (dbResponse) {
-      console.log('UserRepository.deleteAllUsers -> deleted')
-      return
+    if (!dbResponse) {
+      throw dbResponse
     }
-    console.log('UserRepository.deleteAllUsers -> error', dbResponse)
-    throw dbResponse
+    console.log('UserRepository.deleteAllUsers -> deleted')
+    return
   }
 }

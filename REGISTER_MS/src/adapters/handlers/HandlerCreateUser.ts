@@ -23,7 +23,6 @@ export class HandlerCreateUser {
         const { message, status, name } = error
         return res.status(status).json({ data: { status, message, name } })
       } else if (error instanceof Error) {
-        console.log('HandlerCreateUser -> error', error)
         const serverError = new ServerErrorException()
         return res.status(serverError.status).json({ data: error.name ?? serverError.message })
       }

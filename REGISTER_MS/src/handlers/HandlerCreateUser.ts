@@ -14,13 +14,11 @@ export class HandlerCreateUser {
     try {
       const { data } = req.body as { data: TCreateUserDTO }
       delete data.confirmPassword
-      console.log('HandlerCreateUser.execute -> data', data)
 
       const response = await this.ServiceCreateUser.execute(data)
 
       res.status(201).json(response)
     } catch (error) {
-      console.log('HandlerCreateUser.execute -> error', error)
       if (error instanceof UserException) {
         const { message, status, name } = error
         return res.status(status).json({ data: { status, message, name } })
