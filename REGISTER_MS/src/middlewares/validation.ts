@@ -7,8 +7,12 @@ const validations = (schema: yup.AnyObjectSchema) => async (req: Request, res: R
     next()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    res.status(400).json({ message: error.errors[0] })
-    console.error(error)
+    if (error instanceof yup.ValidationError) {
+      const { message, name } = error
+      res.status(400).json({ data: { message, name, status: 400 } })
+      console.error(error.message)
+    }
+
   }
 }
 
