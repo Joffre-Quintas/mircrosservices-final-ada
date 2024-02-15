@@ -8,8 +8,10 @@ export class ServiceDeleteAllUsers implements IServiceDeleteAllUsers {
   }
 
   public async execute(): Promise<void> {
-    console.log('ServiceDeleteAllUsers.execute -> deleteAllUsers')
+    console.log('ServiceDeleteAllUsers.execute -> deleting')
 
     await this.userRepository.deleteAllUsers()
+    
+    console.log('ServiceDeleteAllUsers.execute -> deleted')
   }
 }

@@ -10,9 +10,10 @@ export class ServiceCreateUser implements IServiceCreateUser {
   }
 
   public async execute(data: TCreateUserDTO): Promise<TCreateUserResponse> {
+    console.log('ServiceCreateUser.execute -> creating')
+
     await this.userRepository.findByCPF(data.cpf).then(
       () => {
-        console.log('ServiceCreateUser.execute -> UserAlreadyExistsException')
         throw new UserAlreadyExistsException()
       },
       () => {}
