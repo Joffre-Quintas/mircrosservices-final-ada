@@ -1,10 +1,12 @@
 import { Router } from 'express'
-import { AplicationController } from '../controller/aplicationController'
 import validations from '../middlewares/validation'
-import { deleteAllUsersSchema } from '../schemas/deleteAllUsers.schema'
+import { deleteAllUsersSchema } from '../schemas'
+import { Singleton } from '../singletons'
+
+const handler = Singleton.getInstance().handlerDeleteAllUsers
 
 const deleteAllUsers = Router()
 
-deleteAllUsers.delete('/delete-all-users', validations(deleteAllUsersSchema), AplicationController.deleteAllUsers)
+deleteAllUsers.delete('/delete-all-users', validations(deleteAllUsersSchema), handler.execute)
 
 export default deleteAllUsers
