@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import 'dotenv/config'
-import { IServiceCreateUser, TCreateUserDTO } from '../models/UserTypes'
-import { UserException, ServerErrorException } from '../adapters/exceptions'
+import { IServiceCreateUser, TCreateUserDTO } from '../../models/UserTypes'
+import { UserException, ServerErrorException } from '../exceptions'
 
 export class HandlerCreateUser {
   private ServiceCreateUser: IServiceCreateUser
@@ -14,21 +14,18 @@ export class HandlerCreateUser {
     try {
       const { data } = req.body as { data: TCreateUserDTO }
       delete data.confirmPassword
-      console.log('HandlerCreateUser.execute -> data', data)
 
       const response = await this.ServiceCreateUser.execute(data)
 
       res.status(201).json(response)
     } catch (error) {
-      console.log('HandlerCreateUser.execute -> error', error)
       if (error instanceof UserException) {
         const { message, status, name } = error
         return res.status(status).json({ data: { status, message, name } })
       } else if (error instanceof Error) {
+        console.log('HandlerCreateUser -> error', error)
         const serverError = new ServerErrorException()
-        return error
-          ? res.status(serverError.status).json({ data: error })
-          : res.status(serverError.status).json({ data: serverError.message })
+        return res.status(serverError.status).json({ data: error.name ?? serverError.message })
       }
     }
   }

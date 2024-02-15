@@ -1,11 +1,12 @@
 import { Router } from 'express'
-import {AplicationController} from '../controller/aplicationController'
-import { createUserSchema } from '../schemas/createUser.schema'
-
+import { createUserSchema } from '../schemas'
 import validations from '../middlewares/validation'
+import { Singleton } from '../singletons'
+
+const handler = Singleton.getInstance().handlerCreateUser
 
 const createUser = Router()
 
-createUser.post('/create-user', validations(createUserSchema), AplicationController.createUser)
+createUser.post('/create-user', validations(createUserSchema), handler.execute)
 
 export default createUser

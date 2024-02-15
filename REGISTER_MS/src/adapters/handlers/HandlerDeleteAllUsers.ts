@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import 'dotenv/config'
-import { IServiceDeleteAllUsers } from '../models/UserTypes'
-import { UserException, ServerErrorException } from '../adapters/exceptions'
+import { IServiceDeleteAllUsers } from '../../models/UserTypes'
+import { UserException, ServerErrorException } from '../exceptions'
 
 export class HandlerDeleteAllUsers {
   private ServiceDeleteAllUsers: IServiceDeleteAllUsers
