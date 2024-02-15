@@ -13,6 +13,8 @@ class HandlerCreateUser {
   public execute = async (req: Request, res: Response) => {
     try {
       const { data } = req.body as { data: TCreateUserDTO }
+      delete data.confirmPassword
+      console.log('HandlerCreateUser.execute -> data', data)
 
       const response = await this.ServiceCreateUser.execute(data)
 
@@ -20,11 +22,11 @@ class HandlerCreateUser {
     } catch (error) {
       if (error instanceof UserException) {
         const { message, status, name } = error
-        return res.status(status).json({ status, message, name })
+        return res.status(status).json({ data: { status, message, name } })
+      } else if (error instanceof Error) {
+        const serverError = new ServerErrorException()
+        return res.status(serverError.status).json({ data: error.name ?? serverError.message })
       }
-
-      const serverError = new ServerErrorException()
-      return res.status(serverError.status).json(error ?? serverError)
     }
   }
 }

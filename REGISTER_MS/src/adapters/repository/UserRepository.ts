@@ -1,43 +1,43 @@
-import { database } from '../../../databaseMock/database'
+import { PrismaClient } from '@prisma/client'
 import { UserNotFoundException } from '../exceptions/Exceptions'
 import { TUser, TCreateUserDTO, IUserRepository } from '../../models/UserTypes'
 
-// database mock é um banco de dados em memória
-
 export class UserRepository implements IUserRepository {
-  private generateId(): string {
-    return (
-      database.users.reduce((acc, user) => {
-        if (parseInt(user.id) > acc) {
-          return parseInt(user.id)
-        }
-        return acc
-      }, 0) + 1
-    ).toString()
+  private prisma: PrismaClient
+
+  constructor() {
+    this.prisma = new PrismaClient()
   }
 
   public async createUser(data: TCreateUserDTO): Promise<TUser> {
     const user = {
-      ...data,
-      id: this.generateId()
+      ...data
     }
+    console.log('UserRepository.createUser -> creating user:', user)
 
-    const dbResponse = database.users.push(user)
-    console.log('UserRepository.createUser -> user', user)
+    const dbResponse = await this.prisma.users.create({
+      data: {
+        ...user
+      }
+    })
 
-    if (dbResponse) return Promise.resolve(user)
+    if (dbResponse) {
+      console.log('UserRepository.createUser -> created user:', dbResponse.id)
+      return dbResponse
+    }
+    console.log('UserRepository.createUser -> error')
     throw dbResponse
   }
 
   public async findByCPF(cpf: string): Promise<TUser> {
-    const user = database.users.find((user) => user.cpf === cpf)
+    const user = await this.prisma.users.findUnique({ where: { cpf: cpf } })
 
     if (!user) throw new UserNotFoundException()
 
-    return Promise.resolve(user)
+    return user
   }
 
   public async deleteAllUsers(): Promise<void> {
-    database.users = []
+    await this.prisma.users.deleteMany()
   }
 }
