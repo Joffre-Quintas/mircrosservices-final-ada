@@ -1,8 +1,8 @@
 // user
 export type TUser = {
   id: string
-  name: string
   email: string
+  name: string
   cpf: string
   streetNumber: number
   neighborhood: string
@@ -10,14 +10,16 @@ export type TUser = {
   state: string
   country: string
   password: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 // create user
-export type TCreateUserDTO = Omit<TUser, 'id'> & {
-  confirmPassword: string
-}
+export type TCreateUserDTO = Omit<TUser, 'id' | 'createdAt' | 'updatedAt'> & { confirmPassword?: string }
 
-export type TCreateUserResponse = Pick<TUser, 'name' | 'email' | 'cpf'>
+export type TCreateUserResponse = {
+  data: Pick<TUser, 'name' | 'email' | 'cpf' | 'createdAt' | 'updatedAt'>
+}
 
 // repositories
 export interface IUserRepository {

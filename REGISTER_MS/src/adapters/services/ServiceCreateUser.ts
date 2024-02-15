@@ -1,5 +1,5 @@
 import { UserAlreadyExistsException } from '../exceptions/Exceptions'
-import { IServiceCreateUser, IUserRepository, TCreateUserDTO, TCreateUserResponse } from '../../models/UserTypes'
+import { IServiceCreateUser, IUserRepository, TCreateUserDTO, TCreateUserResponse, TUser } from '../../models/UserTypes'
 import bcrypt from 'bcrypt'
 
 export class ServiceCreateUser implements IServiceCreateUser {
@@ -20,15 +20,18 @@ export class ServiceCreateUser implements IServiceCreateUser {
     const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS ?? '10'))
     const hashedPassword = await bcrypt.hash(data.password, salt)
 
-    console.log('ServiceCreateUser.execute -> salt', {
-      salt,
-      hashedPassword
-    })
+    const newUser: TUser = await this.userRepository.createUser({ ...data, password: hashedPassword })
+    const transformedUser: TCreateUserResponse = {
+      data: {
+        name: newUser.name,
+        email: newUser.email,
+        cpf: newUser.cpf,
+        createdAt: newUser.createdAt,
+        updatedAt: newUser.updatedAt
+      }
+    }
 
-    const newUser = await this.userRepository.createUser({ ...data, password: hashedPassword })
-    const transformedUser: TCreateUserResponse = { name: newUser.name, email: newUser.email, cpf: newUser.cpf }
-
-    // console.log('ServiceCreateUser.execute -> transformedUser', transformedUser)
+    console.log('ServiceCreateUser.execute -> created',)
     return transformedUser
   }
 }
