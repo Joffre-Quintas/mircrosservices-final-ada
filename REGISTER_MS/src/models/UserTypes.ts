@@ -21,22 +21,22 @@ export type TCreateUserResponse = {
   data: Pick<TUser, 'name' | 'email' | 'cpf' | 'createdAt' | 'updatedAt'>
 }
 
+export interface IServiceCreateUser {
+  execute: (data: TCreateUserDTO) => Promise<Partial<TCreateUserResponse>>
+}
+
+// delete all users
+export interface IServiceDeleteAllUsers {
+  execute: () => Promise<void>
+}
+
+
 // repositories
 export interface IUserRepository {
   createUser: (data: TCreateUserDTO) => Promise<TUser>
   deleteAllUsers: () => Promise<void>
   findByCPF: (cpf: string) => Promise<TUser>
 }
-
-// services
-// type TCreateUserResponse = { data: Omit<TCreateUserDTO, TUser['password'] & TUser['password']> }
-export interface IServiceCreateUser {
-  execute: (data: TCreateUserDTO) => Promise<Partial<TCreateUserResponse>>
-}
-export interface IServiceDeleteAllUsers {
-  execute: () => Promise<void>
-}
-
 // exceptions
 export interface IException {
   message: string
