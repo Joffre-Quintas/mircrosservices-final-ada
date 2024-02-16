@@ -30,12 +30,11 @@ export interface IServiceDeleteAllUsers {
   execute: () => Promise<void>
 }
 
-
 // repositories
 export interface IUserRepository {
   createUser: (data: TCreateUserDTO) => Promise<TUser>
-  deleteAllUsers: () => Promise<void>
-  findByCPF: (cpf: string) => Promise<TUser>
+  deleteAllUsers: () => Promise<boolean | void >
+  findByCPF: (cpf: string) => Promise<TUser | false>
 }
 // exceptions
 export interface IException {

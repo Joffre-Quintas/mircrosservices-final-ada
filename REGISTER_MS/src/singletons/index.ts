@@ -1,7 +1,9 @@
-import { PrismaUserRepository, UserRepository } from "../adapters/repository";
-import { ServiceCreateUser, ServiceDeleteAllUsers } from "../adapters/services";
+
+import { ServiceCreateUser, ServiceDeleteAllUsers } from "../domain/services";
 import { HandlerCreateUser, HandlerDeleteAllUsers } from "../adapters/handlers";
-import { IUserRepository, IServiceCreateUser, IServiceDeleteAllUsers } from "../models/UserTypes";
+import { IUserRepository, IServiceCreateUser, IServiceDeleteAllUsers } from "../domain/models/UserTypes";
+import { UserRepository } from "../domain/repository";
+import { PrismaUserRepository } from "../adapters/repository";
 
 export class Singleton {
   private static instance: Singleton;

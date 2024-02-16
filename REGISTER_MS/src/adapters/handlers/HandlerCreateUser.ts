@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import 'dotenv/config'
-import { IServiceCreateUser, TCreateUserDTO } from '../../models/UserTypes'
-import { UserException, ServerErrorException } from '../exceptions'
+import { IServiceCreateUser, TCreateUserDTO } from '../../domain/models/UserTypes'
+import { UserException, ServerErrorException } from '../../domain/exceptions'
 
 export class HandlerCreateUser {
   private ServiceCreateUser: IServiceCreateUser
@@ -24,7 +24,9 @@ export class HandlerCreateUser {
         return res.status(status).json({ data: { status, message, name } })
       } else if (error instanceof Error) {
         const serverError = new ServerErrorException()
-        return res.status(serverError.status).json({ data: error.name ?? serverError.message })
+        return error.message
+          ? res.status(serverError.status).json({ data: error })
+          : res.status(serverError.status).json({ data: serverError })
       }
     }
   }

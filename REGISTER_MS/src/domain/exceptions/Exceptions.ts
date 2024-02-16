@@ -1,4 +1,4 @@
-import { IException } from '../../models/UserTypes'
+import { IException } from '../models/UserTypes'
 
 class GenericExeption extends Error implements IException {
   public status: number
@@ -7,11 +7,11 @@ class GenericExeption extends Error implements IException {
     super(message)
     this.name = name
     this.status = status || 500
-    this.consoleLog()
+    this.consoleError()
   }
 
-  consoleLog() {
-    console.log(this)
+  consoleError() {
+    console.error(this)
   }
 }
 

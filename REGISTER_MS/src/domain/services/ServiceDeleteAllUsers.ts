@@ -1,4 +1,4 @@
-import { IServiceDeleteAllUsers, IUserRepository } from '../../models/UserTypes'
+import { IServiceDeleteAllUsers, IUserRepository } from "../models/UserTypes"
 
 export class ServiceDeleteAllUsers implements IServiceDeleteAllUsers {
   private userRepository: IUserRepository

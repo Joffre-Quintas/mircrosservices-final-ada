@@ -1,5 +1,4 @@
-import { UserAlreadyExistsException } from '../exceptions/Exceptions'
-import { IServiceCreateUser, IUserRepository, TCreateUserDTO, TCreateUserResponse, TUser } from '../../models/UserTypes'
+import { IServiceCreateUser, IUserRepository, TCreateUserDTO, TCreateUserResponse, TUser } from '../models/UserTypes'
 import bcrypt from 'bcrypt'
 
 export class ServiceCreateUser implements IServiceCreateUser {
@@ -11,13 +10,6 @@ export class ServiceCreateUser implements IServiceCreateUser {
 
   public async execute(data: TCreateUserDTO): Promise<TCreateUserResponse> {
     console.log('ServiceCreateUser.execute -> creating')
-
-    await this.userRepository.findByCPF(data.cpf).then(
-      () => {
-        throw new UserAlreadyExistsException()
-      },
-      () => {}
-    )
 
     const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS ?? '10'))
     const hashedPassword = await bcrypt.hash(data.password, salt)
