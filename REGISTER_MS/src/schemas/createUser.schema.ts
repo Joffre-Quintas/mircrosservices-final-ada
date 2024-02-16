@@ -14,7 +14,7 @@ const createUserSchema = yup.object({
     .string()
     .required()
     .when('password', (password, schema) => {
-      return schema.oneOf(password)
+      return schema.oneOf(password, "Password and Confirm Password must be the same.")
     })
 })
 
