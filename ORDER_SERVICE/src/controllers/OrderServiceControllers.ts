@@ -7,9 +7,9 @@ class OrderServiceController {
     try {
       const { userId, description }: TNewOrder = req.body
       
-      const actual = await OrderServiceUsecase.newOrder({userId, description})
+      const response = await OrderServiceUsecase.newOrder({userId, description})
       
-      res.status(200).json(actual)
+      res.status(200).json(response)
     } catch (error: any) {
       res.status(error.status ?? 500).json({message: error.message ?? 'Server error!'})
     }

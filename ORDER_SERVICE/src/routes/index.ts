@@ -3,6 +3,6 @@ import OrderServiceController from "../controllers/OrderServiceControllers";
 
 const routes = Router()
 
-routes.get('/new-order', OrderServiceController.newOrder)
+routes.post('/new-order', OrderServiceController.newOrder)
 
 export default routes
