@@ -1,10 +1,15 @@
-import { Router } from "express";
-import OrderServiceController from "../controllers/OrderServiceControllers";
-import validations from "../middlewares/validation";
-import { newOrderSchema } from "../schemas/newOrderSchema";
+import { Router } from 'express'
+import { OrderServiceController } from '../controllers/OrderServiceControllers'
+import { OrderServiceUsecase } from '../usecases/OrderServiceUsecase'
+import validations from '../middlewares/validation'
+import { newOrderSchema } from '../schemas/newOrderSchema'
+import prisma from '../prisma'
 
 const routes = Router()
 
-routes.post('/new-order', validations(newOrderSchema), OrderServiceController.newOrder)
+const orderService = new OrderServiceUsecase(prisma)
+const orderController = new OrderServiceController(orderService)
+
+routes.post('/new-order', validations(newOrderSchema), orderController.newOrder)
 
 export default routes

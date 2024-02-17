@@ -3,8 +3,10 @@ import prisma from '../prisma'
 import { TNewOrder } from '../schemas/newOrderSchema'
 
 class OrderServiceUsecase {
-    static newOrder = async (order: TNewOrder) => {
-        const user = await prisma.user.findFirst({ where: { id: order.userId } })
+    constructor(private prismaInstance = prisma) {}
+
+    async newOrder(order: TNewOrder) {
+        const user = await this.prismaInstance.user.findFirst({ where: { id: order.userId } })
 
         if (!user) {
             throw new CustomException(404, 'User not found!')
@@ -16,4 +18,4 @@ class OrderServiceUsecase {
     }
 }
 
-export default OrderServiceUsecase
+export { OrderServiceUsecase }
