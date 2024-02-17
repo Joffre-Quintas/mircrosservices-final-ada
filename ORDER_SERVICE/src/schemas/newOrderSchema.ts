@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 const newOrderSchema = yup.object({
-  userId: yup.string().required(),
+  userId: yup.string().uuid().required(),
   description: yup.string().required()
 })
 
