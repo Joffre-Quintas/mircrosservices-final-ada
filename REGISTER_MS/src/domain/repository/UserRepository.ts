@@ -10,9 +10,14 @@ export class UserRepository implements IUserRepository {
 
   public async createUser(data: TCreateUserDTO): Promise<TUser> {
     console.log('UserRepository.createUser -> finding existing user')
-    const user = await this.repository.findByCPF(data.cpf)
-    if (user) {
-      throw new UserAlreadyExistsException()
+    const ifCPF = await this.repository.findByCPF(data.cpf)
+    const ifEmail = await this.repository.findByEmail(data.email)
+
+    if (ifCPF || ifEmail) {
+      if (ifCPF && ifEmail) throw new UserAlreadyExistsException('CPF and Email are already in use')
+
+      const message = ifCPF ? 'CPF is already in use' : 'Email is already in use'
+      throw new UserAlreadyExistsException(message)
     }
     console.log('UserRepository.createUser -> existing user not found')
 
@@ -33,6 +38,17 @@ export class UserRepository implements IUserRepository {
       throw new UserNotFoundException()
     }
     console.log('UserRepository.findByCPF -> found')
+    return response
+  }
+
+  public async findByEmail(email: string): Promise<TUser> {
+    console.log('UserRepository.findByEmail -> finding')
+    const response = await this.repository.findByEmail(email)
+
+    if (!response) {
+      throw new UserNotFoundException()
+    }
+    console.log('UserRepository.findByEmail -> found')
     return response
   }
 

@@ -28,8 +28,8 @@ export class UserException extends GenericExeption {
 }
 
 export class UserAlreadyExistsException extends UserException {
-  constructor() {
-    super('User already exists', 409, 'UserAlreadyExistsException')
+  constructor(message?: string) {
+    super(message ?? 'User already exists', 409, 'UserAlreadyExistsException')
   }
 }
 

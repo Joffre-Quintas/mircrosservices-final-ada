@@ -24,6 +24,16 @@ export class PrismaUserRepository implements IUserRepository {
     return dbResponse
   }
 
+  public async findByEmail(email: string): Promise<TUser | false> {
+    const dbResponse = await this.prisma.users.findUnique({ where: { email: email } })
+
+    if (!dbResponse) {
+      return false
+    }
+
+    return dbResponse
+  }
+
   public async deleteAllUsers(): Promise<boolean> {
     const dbResponse = await this.prisma.users.deleteMany()
 

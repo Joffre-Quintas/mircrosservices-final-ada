@@ -9,7 +9,7 @@ const validations = (schema: yup.AnyObjectSchema) => async (req: Request, res: R
   } catch (error: any) {
     if (error instanceof yup.ValidationError) {
       const { message, name } = error
-      res.status(400).json({ data: { message, name, status: 400 } })
+      res.status(400).json({ message, name, status: 400 })
       console.error(error.message)
     }
 
