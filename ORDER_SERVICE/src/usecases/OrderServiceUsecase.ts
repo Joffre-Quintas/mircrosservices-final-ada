@@ -1,7 +1,8 @@
 import CustomException from '../exceptions/CustoException'
 import prisma from '../prisma'
 import { TNewOrder } from '../schemas/newOrderSchema'
-
+import Rabbitmq from '../services/rabbitmq'
+import 'dotenv/config'
 class OrderServiceUsecase {
     constructor(private prismaInstance = prisma) {}
 
@@ -12,7 +13,12 @@ class OrderServiceUsecase {
             throw new CustomException(404, 'User not found!')
         }
 
-        await prisma.orders.create({ data: order })
+        await prisma.orders.create({ data: order }).then(() => {
+            Rabbitmq.publisherInQueueOrders(
+                process.env.ROUTING_KEY as string,
+                JSON.stringify({ userId: user.id, name: user.name, email: user.email })
+            )
+        })
 
         return { message: 'Order registered!' }
     }

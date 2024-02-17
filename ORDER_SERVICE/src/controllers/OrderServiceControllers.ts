@@ -7,6 +7,7 @@ class OrderServiceController {
 
     constructor(orderService: OrderServiceUsecase) {
         this.orderService = orderService
+
         this.newOrder = this.newOrder.bind(this)
     }
 
