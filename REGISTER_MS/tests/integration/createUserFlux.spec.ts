@@ -35,7 +35,7 @@ enum EHttpStatus {
 }
 
 describe('Create User Flux', () => {
-  afterAll(async () => {
+  beforeAll(async () => {
     await Singleton.getInstance().userRepository.deleteAllUsers()
   })
 
@@ -47,10 +47,23 @@ describe('Create User Flux', () => {
   })
 
   it(`should return a "${EHttpStatus.CONFLICT}" status code if the user already exists`, async () => {
+    await request(app).post('/create-user').send(reqMock.body)
     const res = await request(app).post('/create-user').send(reqMock.body)
 
     expect(res.status).toBe(EHttpStatus.CONFLICT)
-    expect(res.body.data.message).toBe('User already exists')
+    expect(res.body.message).toBe('CPF and Email are already in use')
+  })
+
+  it(`should return a "${EHttpStatus.BAD_REQUEST}" status code if any required field is missing`, async () => {
+    const res = await request(app)
+      .post('/create-user')
+      .send({
+        data: {
+          name: 'Eren Yeager'
+        }
+      })
+
+    expect(res.status).toBe(EHttpStatus.BAD_REQUEST)
   })
 
   it(`should return a "${EHttpStatus.BAD_REQUEST}" status code if the password and confirmPassword are different`, async () => {
@@ -64,26 +77,15 @@ describe('Create User Flux', () => {
       })
 
     expect(res.status).toBe(EHttpStatus.BAD_REQUEST)
-    expect(res.body.data.message).toBe('Password and Confirm Password must be the same.')
+    expect(res.body.message).toBe('Password and Confirm Password must be the same.')
   })
 
-  it(`should return a "${EHttpStatus.SERVER_ERROR}" status code when an unexpected error occurs`, async () => {
-    jest.spyOn(Singleton.getInstance().userRepository, 'createUser').mockImplementationOnce(() => {
-      throw new Error('Internal server error')
-    })
+  it(`should return a "${EHttpStatus.SERVER_ERROR}" status code if the server is down`, async () => {
+    jest.spyOn(Singleton.getInstance().userRepository, 'createUser').mockRejectedValue(new Error('Server is down'))
 
-    const res = await request(app)
-      .post('/create-user')
-      .send({
-        data: {
-          ...userData(),
-          confirmPassword: userData().password
-        }
-      })
-
-      console.log(res.body.data.message)
+    const res = await request(app).post('/create-user').send(reqMock.body)
 
     expect(res.status).toBe(EHttpStatus.SERVER_ERROR)
-    // expect(res.body.data.message).toBe('Internal server error')
+    expect(res.body).toHaveProperty('error')
   })
 })

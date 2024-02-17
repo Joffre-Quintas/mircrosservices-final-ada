@@ -6,10 +6,10 @@ import { PrismaUserRepository } from '../adapters/repository'
 import { RabbitMQueueService } from '../adapters/services'
 
 export class Singleton {
-  private static instance: Singleton
-  private userRepository: IUserRepository
-  private serviceCreateUser: IServiceCreateUser
-  private serviceDeleteAllUsers: IServiceDeleteAllUsers
+  public static instance: Singleton
+  public userRepository: IUserRepository
+  public serviceCreateUser: IServiceCreateUser
+  public serviceDeleteAllUsers: IServiceDeleteAllUsers
   public handlerCreateUser: HandlerCreateUser
   public handlerDeleteAllUsers: HandlerDeleteAllUsers
 

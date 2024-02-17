@@ -61,6 +61,7 @@ describe('UserRepository', () => {
 
     it('should create a user', async () => {
       jest.spyOn(prismaUserRepository, 'findByCPF').mockReturnValue(Promise.resolve(false))
+      jest.spyOn(prismaUserRepository, 'findByEmail').mockReturnValue(Promise.resolve(false))
 
       const user = await userRepository.createUser(mockDBRequest())
 
@@ -71,6 +72,13 @@ describe('UserRepository', () => {
       jest.spyOn(prismaUserRepository, 'findByCPF').mockReturnValue(Promise.resolve(mockDBResponse()))
 
       const user = await userRepository.findByCPF(mockDBRequest().cpf)
+      expect(user).toEqual(mockDBResponse())
+    })
+
+    it('should find a user by email', async () => {
+      jest.spyOn(prismaUserRepository, 'findByEmail').mockReturnValue(Promise.resolve(mockDBResponse()))
+
+      const user = await userRepository.findByEmail(mockDBRequest().email)
       expect(user).toEqual(mockDBResponse())
     })
 
@@ -85,10 +93,14 @@ describe('UserRepository', () => {
       jest.clearAllMocks()
     })
 
-    it('should throw an error when creating a user that already exists', async () => {
+    it('should throw an error when trying to create a user that already exists', async () => {
       jest.spyOn(prismaUserRepository, 'findByCPF').mockReturnValue(Promise.resolve(mockDBResponse()))
+      jest.spyOn(prismaUserRepository, 'findByEmail').mockReturnValue(Promise.resolve(false))
+      await expect(userRepository.createUser(mockDBRequest())).rejects.toThrow('CPF is already in use')
 
-      await expect(userRepository.createUser(mockDBRequest())).rejects.toThrow('User already exists')
+
+      jest.spyOn(prismaUserRepository, 'findByEmail').mockReturnValue(Promise.resolve(mockDBResponse()))
+      await expect(userRepository.createUser(mockDBRequest())).rejects.toThrow('CPF and Email are already in use')
     })
 
     it('should throw an error when finding a user by cpf that does not exist', async () => {
@@ -97,8 +109,16 @@ describe('UserRepository', () => {
       await expect(userRepository.findByCPF(mockDBRequest().cpf)).rejects.toThrow(UserNotFoundException)
     })
 
-    it.skip('should throw an error when deleting all users', async () => {
-      jest.spyOn(prismaUserRepository, 'deleteAllUsers').mockReturnValue(Promise.resolve(false))
+    it('should throw an error when finding a user by email that does not exist', async () => {
+      jest.spyOn(prismaUserRepository, 'findByEmail').mockReturnValue(Promise.resolve(false))
+
+      await expect(userRepository.findByEmail(mockDBRequest().email)).rejects.toThrow(UserNotFoundException)
+    })
+
+    it('should throw an error if doesnot delete all users', async () => {
+      jest
+        .spyOn(prismaUserRepository, 'deleteAllUsers')
+        .mockReturnValue(Promise.reject(new Error('Error deleting all users')))
 
       await expect(userRepository.deleteAllUsers()).rejects.toThrow()
     })
