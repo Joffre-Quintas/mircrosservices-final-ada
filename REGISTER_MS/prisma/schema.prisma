@@ -10,9 +10,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// DEPRECATED schemas
 model Users {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  email        String
+  email        String   @unique
   name         String
   cpf          String   @unique
   streetNumber Int
@@ -24,3 +25,28 @@ model Users {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+
+// NEW schemas
+// model Users {
+//   id         String   @id @default(auto()) @map("_id") @db.ObjectId
+//   email      String   @unique
+//   name       String
+//   cpf        String   @unique
+//   createdAt  DateTime @default(now())
+//   updatedAt  DateTime @updatedAt
+//   addressId  String @db.ObjectId 
+//   address    Address  @relation("AddressToUsers", fields: [addressId], references: [id])
+// }
+
+// model Address {
+//   id           String   @id @default(auto()) @map("_id") @db.ObjectId
+//   users        Users[] @relation("AddressToUsers")
+//   street       String
+//   number       String
+//   neighborhood String
+//   city         String
+//   state        String
+//   createdAt    DateTime @default(now())
+//   updatedAt    DateTime @updatedAt
+// }

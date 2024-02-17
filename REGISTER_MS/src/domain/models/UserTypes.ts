@@ -35,7 +35,19 @@ export interface IUserRepository {
   createUser: (data: TCreateUserDTO) => Promise<TUser>
   deleteAllUsers: () => Promise<boolean | void >
   findByCPF: (cpf: string) => Promise<TUser | false>
+  findByEmail: (email: string) => Promise<TUser | false>
 }
+
+// queue service
+export type TqueueDTO = {
+  exchange?: string
+  routingKey?: string
+  message?: string
+}
+export interface IQueueService {
+  publish: (data: TqueueDTO) => Promise<void>
+}
+
 // exceptions
 export interface IException {
   message: string
