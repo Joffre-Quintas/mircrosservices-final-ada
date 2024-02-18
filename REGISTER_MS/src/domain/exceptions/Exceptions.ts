@@ -38,3 +38,9 @@ export class UserNotFoundException extends UserException {
     super('User not found', 404, 'UserNotFoundException')
   }
 }
+
+export class AddressNotFoundException extends UserException {
+  constructor() {
+    super('Address not found', 404, 'AddressNotFoundException')
+  }
+}

@@ -1,16 +1,16 @@
-import { IServiceDeleteAllUsers, IUserRepository } from "../models/UserTypes"
+import { IServiceDeleteAllUsers, IRepository } from "../models/UserTypes"
 
 export class ServiceDeleteAllUsers implements IServiceDeleteAllUsers {
-  private userRepository: IUserRepository
+  private Repository: IRepository
 
-  constructor(userRepository: IUserRepository) {
-    this.userRepository = userRepository
+  constructor(Repository: IRepository) {
+    this.Repository = Repository
   }
 
   public async execute(): Promise<void> {
     console.log('ServiceDeleteAllUsers.execute -> deleting')
 
-    await this.userRepository.deleteAllUsers()
+    await this.Repository.deleteAllUsers()
     
     console.log('ServiceDeleteAllUsers.execute -> deleted')
   }

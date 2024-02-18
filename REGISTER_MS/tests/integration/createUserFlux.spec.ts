@@ -9,11 +9,12 @@ function userData(): TCreateUserDTO {
     name: 'Eren Yeager',
     email: 'tita@eren.yeager',
     cpf: '12345678900',
-    streetNumber: 22,
-    neighborhood: 'Shiganshina',
-    city: 'Maria',
-    state: 'Paradis',
-    country: 'Japan',
+    // streetNumber: 22,
+    // neighborhood: 'Shiganshina',
+    // city: 'Maria',
+    // state: 'Paradis',
+    // country: 'Japan',
+    addressId: '1',
     password: 'O_mundo_e_um_lugar_cruel'
   }
 }

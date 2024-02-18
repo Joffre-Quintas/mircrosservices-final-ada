@@ -1,7 +1,7 @@
 import {
   IQueueService,
   IServiceCreateUser,
-  IUserRepository,
+  IRepository,
   TCreateUserDTO,
   TCreateUserResponse,
   TUser,
@@ -10,11 +10,11 @@ import {
 import bcrypt from 'bcrypt'
 
 export class ServiceCreateUser implements IServiceCreateUser {
-  private userRepository: IUserRepository
+  private Repository: IRepository
   private queueService: IQueueService
 
-  constructor(userRepository: IUserRepository, queueService: IQueueService) {
-    this.userRepository = userRepository
+  constructor(Repository: IRepository, queueService: IQueueService) {
+    this.Repository = Repository
     this.queueService = queueService
   }
 
@@ -24,7 +24,7 @@ export class ServiceCreateUser implements IServiceCreateUser {
     const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS!))
     const hashedPassword = await bcrypt.hash(data.password, salt)
 
-    const newUser: TUser = await this.userRepository.createUser({ ...data, password: hashedPassword })
+    const newUser: TUser = await this.Repository.createUser({ ...data, password: hashedPassword })
 
     const transformedUser: TCreateUserResponse = {
       data: {
