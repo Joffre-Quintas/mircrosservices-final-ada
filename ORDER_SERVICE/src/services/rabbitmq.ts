@@ -19,9 +19,7 @@ class Rabbitmq {
     static publisherInQueueOrders = async (channel: string, message: string) => {
         const rbChannel = Rabbitmq.channel
         try {
-            // rbChannel.assertExchange(channel, 'fanout', {durable: true})
             rbChannel.publish(process.env.EXCHANGE_NAME as string, channel, Buffer.from(message))
-            return rbChannel.sendToQueue(channel, Buffer.from(message))
         } catch (error) {
             console.log()
         }
