@@ -4,11 +4,6 @@ const createUserSchema = yup.object({
   name: yup.string().required(),
   email: yup.string().email().required(),
   cpf: yup.string().required(),
-  // streetNumber: yup.number().required(),
-  // neighborhood: yup.string().required(),
-  // city: yup.string().required(),
-  // state: yup.string().required(),
-  // country: yup.string().required(),
   addressId: yup.string().required(),
   password: yup.string().required(),
   confirmPassword: yup

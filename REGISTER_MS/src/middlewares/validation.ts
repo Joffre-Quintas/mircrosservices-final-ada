@@ -5,8 +5,7 @@ const validations = (schema: yup.AnyObjectSchema) => async (req: Request, res: R
   try {
     await schema.validate(req.body.data)
     next()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+  } catch (error) {
     if (error instanceof yup.ValidationError) {
       const { message, name } = error
       res.status(400).json({ message, name, status: 400 })
