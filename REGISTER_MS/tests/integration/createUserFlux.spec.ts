@@ -9,12 +9,7 @@ function userData(): TCreateUserDTO {
     name: 'Eren Yeager',
     email: 'tita@eren.yeager',
     cpf: '12345678900',
-    // streetNumber: 22,
-    // neighborhood: 'Shiganshina',
-    // city: 'Maria',
-    // state: 'Paradis',
-    // country: 'Japan',
-    addressId: '1',
+    addressId: '65d250f8b67fba36f22b0b9f',
     password: 'O_mundo_e_um_lugar_cruel'
   }
 }
@@ -37,10 +32,10 @@ enum EHttpStatus {
 
 describe('Create User Flux', () => {
   beforeAll(async () => {
-    await Singleton.getInstance().userRepository.deleteAllUsers()
+    await Singleton.getInstance().Repository.deleteAllUsers()
   })
 
-  it(`should create a user and status "${EHttpStatus.CREATED}"`, async () => {
+  it(`should create a user and return status "${EHttpStatus.CREATED}"`, async () => {
     const res = await request(app).post('/create-user').send(reqMock.body)
 
     expect(res.status).toBe(EHttpStatus.CREATED)
@@ -82,7 +77,7 @@ describe('Create User Flux', () => {
   })
 
   it(`should return a "${EHttpStatus.SERVER_ERROR}" status code if the server is down`, async () => {
-    jest.spyOn(Singleton.getInstance().userRepository, 'createUser').mockRejectedValue(new Error('Server is down'))
+    jest.spyOn(Singleton.getInstance().Repository, 'createUser').mockRejectedValue(new Error('Server is down'))
 
     const res = await request(app).post('/create-user').send(reqMock.body)
 
