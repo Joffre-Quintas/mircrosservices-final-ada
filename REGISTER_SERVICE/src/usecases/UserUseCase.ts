@@ -22,8 +22,8 @@ class UserUsecase {
     getUserByCpf = async (cpf: string) => {
         return this.getUser(cpf, 'cpf')
     }
-    getUserByEmail = async (cpf: string) => {
-        return this.getUser(cpf, 'email')
+    getUserByEmail = async (email: string) => {
+        return this.getUser(email, 'email')
     }
 
     createUser = async ({ name, email, cpf, address, password, confirmPassword }: IEnterUser): Promise<string> => {
