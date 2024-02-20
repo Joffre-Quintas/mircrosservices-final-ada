@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// model Users {
+//   id           String   @id @default(auto()) @map("_id") @db.ObjectId
+//   city         String
+//   country      String
+//   cpf          String   @unique
+//   createdAt    DateTime @db.Date
+//   email        String   @unique
+//   name         String
+//   neighborhood String
+//   password     String
+//   state        String
+//   streetNumber BigInt
+//   updatedAt    DateTime @db.Date
+//   addres address[]
+// }
+
+model usermodels {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model users {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  v        Int?    @map("__v")
+  email    String?
+  name     String?
+  password String
+}
+
+// model address {
+//   id       String  @id @default(auto()) @map("_id") @db.ObjectId
+//   cep    String @unique
+//   number     String
+//   complement String
+// }
+
+model Users {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  city         String
+  country      String
+  cpf          String   @unique
+  createdAt    DateTime @db.Date
+  email        String   @unique
+  name         String
+  neighborhood String
+  password     String
+  state        String
+  streetNumber BigInt
+  updatedAt    DateTime @db.Date
+
+  address   address? @relation(fields: [addressId], references: [id])
+  addressId String?  @db.ObjectId
+}
+
+model address {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  cep          String  @unique
+  street       String
+  city         String
+  neighborhood String
+  state        String
+  country      String
+  number       String
+  complement   String
+  users        Users[]
+}
