@@ -16,10 +16,10 @@ class Rabbitmq {
         }
     }
 
-    static publisherInQueueOrders = async (channel: string, message: string) => {
+    static publisherInQueueOrders = async (message: string) => {
         const rbChannel = Rabbitmq.channel
         try {
-            rbChannel.publish(process.env.EXCHANGE_NAME as string, channel, Buffer.from(message))
+            rbChannel.sendToQueue(process.env.QUEUE_NAME as string, Buffer.from(message))
         } catch (error) {
             console.log()
         }

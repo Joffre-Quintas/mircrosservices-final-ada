@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import AuthUsecase from '../usecases/AuthUsecase'
 import { TLogin } from '../schema/loginSchema'
+import CustomException from '../exceptions'
 
 class AuthControllers {
     private authUsecase: AuthUsecase
@@ -23,8 +24,11 @@ class AuthControllers {
 
     verify = async (req: Request, res: Response) => {
         try {
-            const token: string = req.body
+            const token: string | undefined = req.headers.authorization
 
+            if (!token) {
+                throw new CustomException(400, 'Token is empty!')
+            }
             const isChecked: boolean = await this.authUsecase.verify(token)
 
             res.status(200).json(isChecked)

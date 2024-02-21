@@ -15,8 +15,7 @@ class OrderServiceUsecase {
 
         await prisma.orders.create({ data: order }).then(() => {
             Rabbitmq.publisherInQueueOrders(
-                process.env.ROUTING_KEY as string,
-                JSON.stringify({ userId: user.id, name: user.name, email: user.email })
+                JSON.stringify({ userId: user.id, name: user.name, email: user.email, queue: 'order' })
             )
         })
 
