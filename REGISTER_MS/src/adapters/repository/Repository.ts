@@ -29,7 +29,7 @@ export class Repository implements IRepository {
 
     // creating user
     console.log('Repository.createUser -> creating')
-    const response = await this.prisma.users.create({ data })
+    const response = await this.prisma.user.create({ data })
     if (!response) {
       throw response
     }
@@ -40,18 +40,21 @@ export class Repository implements IRepository {
 
   public async findAllUsers(): Promise<TUser[]> {
     console.log('Repository.findAllUsers -> finding')
-    const response = await this.prisma.users.findMany({ include: { address: true } })
+    const response = await this.prisma.user.findMany({ include: { address: true } })
 
     if (!response) {
       throw response
     }
     console.log('Repository.findAllUsers -> found')
+
+    console.log(await this.prisma.user.findFirst({ where: { id: '5c61ebdb-5d96-423d-8c89-06688f58e4e5' } }))
+
     return response
   }
 
   public async findUserByCPF(cpf: string): Promise<TUser> {
     console.log('Repository.findUserByCPF -> finding')
-    const response = await this.prisma.users.findUnique({ where: { cpf: cpf }, include: { address: true } })
+    const response = await this.prisma.user.findUnique({ where: { cpf: cpf }, include: { address: true } })
 
     if (!response) {
       throw new UserNotFoundException()
@@ -62,7 +65,7 @@ export class Repository implements IRepository {
 
   public async findUserByEmail(email: string): Promise<TUser> {
     console.log('Repository.findUserByEmail -> finding')
-    const response = await this.prisma.users.findUnique({ where: { email: email }, include: { address: true } })
+    const response = await this.prisma.user.findUnique({ where: { email: email }, include: { address: true } })
 
     if (!response) {
       throw new UserNotFoundException()
@@ -73,7 +76,7 @@ export class Repository implements IRepository {
 
   public async deleteAllUsers(): Promise<void> {
     console.log('Repository.deleteAllUsers -> deleting')
-    const response = await this.prisma.users.deleteMany()
+    const response = await this.prisma.user.deleteMany()
 
     if (!response) {
       throw response

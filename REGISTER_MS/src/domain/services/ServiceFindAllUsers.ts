@@ -14,6 +14,7 @@ export class ServiceFindAllUsers implements IServiceFindAllUsers {
     dbResponse
 
 const transformedResponse: TFindAllUsersResponse = {
+  
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   data: dbResponse.map(({ password, addressId, ...rest }) => rest)
 }

@@ -20,6 +20,11 @@ export class RabbitMQueueService implements IQueueService {
     const { exchange, routingKey, message } = data
 
   await this.channel.assertQueue(routingKey!)
+    // send to queue
+    // queue_name
+    
+    // JSON.stringify({ userId: user.id, name: user.name, email: user.email, queue:'order' })
+    // await this.channel.sendToQueue(routingKey!, Buffer.from(message!))
     this.channel.publish(exchange!, routingKey!, Buffer.from(message!))
   }
 }

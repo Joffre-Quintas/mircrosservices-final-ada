@@ -27,13 +27,7 @@ export class ServiceCreateUser implements IServiceCreateUser {
     const newUser: TUser = await this.Repository.createUser({ ...data, password: hashedPassword })
 
     const transformedUser: TCreateUserResponse = {
-      data: {
-        name: newUser.name,
-        email: newUser.email,
-        cpf: newUser.cpf,
-        createdAt: newUser.createdAt,
-        updatedAt: newUser.updatedAt
-      }
+      message: 'Successfully created user'
     }
     console.log('ServiceCreateUser.execute -> created')
 

@@ -14,19 +14,24 @@ export type TUser = {
 // address
 export type TAddress = {
   id: string
-  streetNumber: string
   neighborhood: string
   city: string
   state: string
   country: string
+  cep: string
+  street: string
+  number: string
+  complement: string
 }
 
 // user DTOs and responses
-export type TCreateUserDTO = Omit<TUser, 'id' | 'createdAt' | 'updatedAt' | 'address' > & { confirmPassword?: string }
+export type TCreateUserDTO = Omit<TUser, 'id' | 'createdAt' | 'updatedAt' | 'address'> & { confirmPassword?: string }
 
 export type TCreateUserResponse = {
-  data: Pick<TUser, 'name' | 'email' | 'cpf' | 'createdAt' | 'updatedAt'>
+  // data: Pick<TUser, 'name' | 'email' | 'cpf' | 'createdAt' | 'updatedAt'>
+  message: string
 }
+
 export type TFindAllUsersResponse = {
   data: Omit<TUser, 'password' | 'addressId'>[]
 }
@@ -39,7 +44,7 @@ export type TqueueDTO = {
 
 // services
 export interface IServiceCreateUser {
-  execute: (data: TCreateUserDTO) => Promise<Partial<TCreateUserResponse>>
+  execute: (data: TCreateUserDTO) => Promise<TCreateUserResponse>
 }
 
 export interface IServiceFindAllUsers {
