@@ -3,7 +3,6 @@ import AuthUsecase from '../usecases/AuthUsecase'
 import AuthControllers from '../controllers/AuthControllers'
 import prisma from '../prisma'
 import validations from '../middlewares/validation'
-import tokenSchema from '../schema/tokenSchema'
 import { loginSchema } from '../schema/loginSchema'
 
 const routes = Router()
