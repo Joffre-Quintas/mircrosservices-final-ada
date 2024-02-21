@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import 'dotenv/config'
-import HandlerAuthService from '../../../../src/handlers/HandlerAuthSession'
+import HandlerAuthService from '../../../../src/handlers/HandlerAuthService'
 import { errorFactory, reqMockFactory, resMockFactory } from '../../../../mocks'
 
 jest.mock('axios')

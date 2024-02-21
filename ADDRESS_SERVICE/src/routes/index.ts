@@ -11,7 +11,7 @@ const addressUsecase = new AddressUsecase(prisma)
 const addressController = new AddressController(addressUsecase)
 
 routes.use(validations(dataEnterAddressSchema))
-routes.get('/get-address', addressController.getAddress)
+routes.post('/get-address', addressController.getAddress)
 routes.post('/create-address', addressController.createAddress)
 
 export default routes

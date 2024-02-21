@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import HandleAuthService from '../handlers/HandlerAuthSession'
+import HandleAuthService from '../handlers/HandlerAuthService'
 import { createSessionSchema } from '../schemas/createSession.schema'
 
 import validations from '../middlewares/validation'
