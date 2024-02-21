@@ -1,3 +1,4 @@
+import payloadRMQDTO from '../DTO/payloadRMQ'
 import CustomException from '../exceptions/CustoException'
 import prisma from '../prisma'
 import { TNewOrder } from '../schemas/newOrderSchema'
@@ -15,7 +16,7 @@ class OrderServiceUsecase {
 
         await prisma.orders.create({ data: order }).then(() => {
             Rabbitmq.publisherInQueueOrders(
-                JSON.stringify({ userId: user.id, name: user.name, email: user.email, queue: 'order' })
+                JSON.stringify(new payloadRMQDTO(user.id, user.name, user.email, order.description, 'order'))
             )
         })
 

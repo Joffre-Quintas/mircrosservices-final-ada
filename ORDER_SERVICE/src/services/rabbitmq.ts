@@ -16,13 +16,9 @@ class Rabbitmq {
         }
     }
 
-    static publisherInQueueOrders = async (message: string) => {
+    static publisherInQueueOrders = (message: string) => {
         const rbChannel = Rabbitmq.channel
-        try {
-            rbChannel.sendToQueue(process.env.QUEUE_NAME as string, Buffer.from(message))
-        } catch (error) {
-            console.log()
-        }
+        rbChannel.sendToQueue(process.env.QUEUE_NAME as string, Buffer.from(message))
     }
 }
 
