@@ -22,7 +22,8 @@ class AuthUsecase {
         return token
     }
 
-    verify = async (token: string) => {
+    verify = async (bearerToken: string) => {
+        const token = bearerToken.split(' ')[1]
         const user = jwt.verify(token, process.env.SECRET as string)
 
         return !!user

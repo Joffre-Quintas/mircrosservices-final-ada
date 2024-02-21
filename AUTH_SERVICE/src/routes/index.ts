@@ -10,7 +10,7 @@ const routes = Router()
 const authUsecase = new AuthUsecase(prisma)
 const authControllers = new AuthControllers(authUsecase)
 
-routes.get('/verify', authControllers.verify)
 routes.post('/create-session', validations(loginSchema), authControllers.createSession)
+routes.get('/verify-session', authControllers.verify)
 
 export default routes

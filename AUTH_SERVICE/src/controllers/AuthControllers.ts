@@ -24,12 +24,13 @@ class AuthControllers {
 
     verify = async (req: Request, res: Response) => {
         try {
-            const token: string | undefined = req.headers.authorization
+            const bearerToken: string | undefined = req.headers.authorization
 
-            if (!token) {
-                throw new CustomException(400, 'Token is empty!')
+            if (!bearerToken) {
+                throw new CustomException(404, 'Authorization is missing!')
             }
-            const isChecked: boolean = await this.authUsecase.verify(token)
+
+            const isChecked: boolean = await this.authUsecase.verify(bearerToken)
 
             res.status(200).json(isChecked)
         } catch (error: any) {
