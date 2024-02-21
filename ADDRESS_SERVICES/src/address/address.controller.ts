@@ -17,5 +17,3 @@ export class AddressController {
   }
 }
 
-//{ zipCode, address, neighborhood, city, state, number, complement }
-//{cep, street, city, neighborhood, state, country, number, complement}
