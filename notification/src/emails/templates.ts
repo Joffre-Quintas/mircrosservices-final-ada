@@ -1,11 +1,11 @@
 const templates = {
-    'register-success': {
+    'register': {
         from: 'seu-email@gmail.com',
         to: 'kathleen.jacobs@ethereal.email',
         subject: '<ADA FOOD> Conta criada com sucesso!',
         text: `Olá! Sua conta foi criada com sucesso!`,
     },
-    'order-success': {
+    'order': {
         from: 'seu-email@gmail.com',
         to: 'kathleen.jacobs@ethereal.email',
         subject: '<ADA FOOD> Pedido confirmado!',
