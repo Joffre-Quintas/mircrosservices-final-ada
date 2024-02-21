@@ -17,9 +17,9 @@ export class AddressService {
       },
     });
 
+    console.log(existingAddress)
     if (existingAddress) {
-      throw new ConflictException('This cep is already registered.');
-     
+      return existingAddress   
     }
 
     try {
@@ -33,6 +33,11 @@ export class AddressService {
   async createAddress({ cep, country = 'Brasil', number, complement }: SessionCreateDTO) {
     const additionalInfo = await this.getAddressByCep(cep, number, complement);
     
+    if (additionalInfo["id"]) {
+      return {id:additionalInfo.id}
+    }
+
+
     const newAddress = await this.prisma.address.create({
       data: {
         cep,
@@ -50,3 +55,4 @@ export class AddressService {
   }
 }
 
+//36ee6b5d-4ae4-435d-98a7-7ed76ccfc6b8
