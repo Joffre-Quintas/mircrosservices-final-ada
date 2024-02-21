@@ -1,6 +1,7 @@
 import mailService from './config/nodemailer';
 import ConnectionRabbitmq from './config/rabbitmq';
 import templates from './emails/templates';
+
 class EmailNotificationService {
     private readonly connectionRabbitmq: ConnectionRabbitmq;
     private readonly mailService: any;
