@@ -9,6 +9,6 @@ const enterUserSchema = yup.object({
     confirmPassword: yup.string().required()
 })
 
-interface IEnterUser extends yup.InferType<typeof enterUserSchema> {}
+type TEnterUser = yup.InferType<typeof enterUserSchema>
 
-export { enterUserSchema, IEnterUser }
+export { enterUserSchema, TEnterUser }

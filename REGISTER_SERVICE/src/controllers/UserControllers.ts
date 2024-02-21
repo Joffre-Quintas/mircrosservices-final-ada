@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import UserUsecase from '../usecases/UserUseCase'
+import { TEnterUser } from '../schemas/enterUserSchema'
 
 class UserControllers {
     private userUsecase: UserUsecase
@@ -9,7 +10,7 @@ class UserControllers {
     }
     newUser = async (req: Request, res: Response) => {
         try {
-            const data = req.body
+            const data: TEnterUser = req.body
 
             const actual: string = await this.userUsecase.createUser(data)
 

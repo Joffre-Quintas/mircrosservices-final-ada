@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { IEnterUser } from '../schemas/enterUserSchema'
+import { TEnterUser } from '../schemas/enterUserSchema'
 import UserDTO from '../DTO/UserDTO'
 import cryptPassword from '../utils/cryptPassword'
 
@@ -26,7 +26,7 @@ class UserUsecase {
         return this.getUser(email, 'email')
     }
 
-    createUser = async ({ name, email, cpf, address, password, confirmPassword }: IEnterUser): Promise<string> => {
+    createUser = async ({ name, email, cpf, address, password, confirmPassword }: TEnterUser): Promise<string> => {
         const userByCPF = await this.getUserByCpf(cpf)
         const userByEmail = await this.getUserByEmail(email)
 

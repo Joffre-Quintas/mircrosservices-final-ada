@@ -1,19 +1,27 @@
 import axios, { isAxiosError } from 'axios'
 import { Request, Response } from 'express'
-
+import { TRegister } from '../schemas/register.schema'
+import UserDTO from '../DTO/userDTO'
 class HandlerRegisterService {
     static register = async (req: Request, res: Response) => {
         try {
-            const dataToRegister: { cep: string; number: string; complement: string } = req.body
-            let addressId: null | string = null
+            const dataToRegister: TRegister = req.body
+            const { cep, number, complement, ...user } = dataToRegister
+            const dataAddress = { cep, number, complement }
 
-            addressId = (await axios.post(`${process.env.ADDRESS_SERVICE_URL}/get-address`, dataToRegister)).data
+            let addressId: string
+
+            addressId = (await axios.post(`${process.env.ADDRESS_SERVICE_URL}/get-address`, dataAddress)).data
 
             if (!addressId) {
-                addressId = (await axios.post(`${process.env.ADDRESS_SERVICE_URL}/create-address`, dataToRegister)).data
+                addressId = (await axios.post(`${process.env.ADDRESS_SERVICE_URL}/create-address`, dataAddress)).data
             }
 
-            res.status(200).json(addressId)
+            const userDTO = new UserDTO(user.name, user.email, user.cpf, user.password, user.confirmPassword, addressId)
+
+            const { data: register } = await axios.post(`${process.env.REGISTER_SERVICE_URL}/register`, userDTO)
+
+            res.status(200).json(register)
         } catch (error: any) {
             if (isAxiosError(error)) {
                 return res
