@@ -1,6 +1,8 @@
-import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
+import { UUID } from "crypto";
 
 export class SessionCreateDTO {
+
     @IsString()
     @IsNotEmpty()
     cep: string
