@@ -1,4 +1,4 @@
-class payloadRMQDTO {
+class PayloadRMQDTO {
     constructor(
         private userId: string,
         private name: string,
@@ -7,4 +7,4 @@ class payloadRMQDTO {
         private queue = 'order'
     ) {}
 }
-export default payloadRMQDTO
+export default PayloadRMQDTO

@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { OrderServiceController } from '../controllers/OrderServiceControllers'
-import { OrderServiceUsecase } from '../usecases/OrderServiceUsecase'
+import OrderServiceController from '../controllers/OrderServiceControllers'
+import OrderServiceUsecase from '../usecases/OrderServiceUsecase'
 import validations from '../middlewares/validation'
 import { newOrderSchema } from '../schemas/newOrderSchema'
 import prisma from '../prisma'
