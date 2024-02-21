@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  rabbitmq:
+    container_name: rabbitmq-mircrosservices-ada
+    image: rabbitmq:3-management-alpine
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rmq-mircrosservices-final-ada-data:/var/lib/rabbitmq/
+      - rmq-mircrosservices-final-log:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: 'admin'
+      RABBITMQ_DEFAULT_PASS: 'admin'
+      RABBITMQ_DEFAULT_VHOST: 'chat'
+
+volumes:
+  rmq-mircrosservices-final-ada-data:
+  rmq-mircrosservices-final-log:
