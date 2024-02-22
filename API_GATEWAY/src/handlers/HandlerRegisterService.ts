@@ -1,7 +1,7 @@
 import axios, { isAxiosError } from 'axios'
 import { Request, Response } from 'express'
 import { TRegister } from '../schemas/register.schema'
-import UserDTO from '../DTO/userDTO'
+import UserDTO from '../DTO/UserDTO'
 class HandlerRegisterService {
     static register = async (req: Request, res: Response) => {
         try {

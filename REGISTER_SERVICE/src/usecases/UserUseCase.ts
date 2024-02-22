@@ -34,7 +34,7 @@ class UserUsecase {
         const userByEmail = await this.getUserByEmail(email)
 
         if (userByCPF || userByEmail) {
-            throw new Error('This user already exist!')
+            throw new CustomException(400, 'This user already exist!')
         }
 
         if (password !== confirmPassword) {
