@@ -10,9 +10,6 @@ Joffre Quintas --->
 
 Trello ---> <https://trello.com/b/wRS0Exxu/ada-food>
 
-## 🔗 Link do Projeto
-#### colocar aqui
-
 ## ✅ Features
 #### ☑️ Feature/1: API Gateway
 #### ☑️ Feature/3: Auth Service
@@ -26,12 +23,9 @@ Trello ---> <https://trello.com/b/wRS0Exxu/ada-food>
 - MongoDB
 - RabbitMQ
 - NestJS
-
-## 🛠️ Instalação
-
-```bash
-npm i
-```
+- TypeScript
+- Nodemail
+- Ethereal
 
 ## 🏃 Para rodar os Services
 
@@ -47,7 +41,7 @@ npm run dev
 
 #### ☑️ Feature/4: Register Service
 ```bash
-npm 
+npm run dev
 ```
 
 #### ☑️ Feature/5: Order Service
@@ -57,7 +51,7 @@ npm run dev
 
 #### ☑️ Feature/6: Notification Service
 ```bash
-npm
+npm run dev
 ```
 
 #### ☑️ Feature/7: Address Service
