@@ -1,0 +1,4 @@
+node_modules
+databaseMock
+coverage/
+.env
