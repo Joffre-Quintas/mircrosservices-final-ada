@@ -33,7 +33,7 @@ Trello ---> <https://trello.com/b/wRS0Exxu/ada-food>
 npm i
 ```
 
-## 🏃 Para rodar os Testes
+## 🏃 Para rodar os Services
 
 #### ☑️ Feature/1: API Gateway
 ```bash
