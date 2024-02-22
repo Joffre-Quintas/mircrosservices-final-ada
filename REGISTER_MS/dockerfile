@@ -1,0 +1,24 @@
+# Dockerfile
+FROM node:18
+
+# Cria o diretório da aplicação
+WORKDIR /usr/src/app
+
+# Copia os arquivos de definição do pacote e instala as dependências
+COPY ./package*.json ./
+RUN npm install
+
+# Copia o restante dos arquivos da aplicação
+COPY ./dist ./
+
+# Compila os arquivos TypeScript para JavaScript
+# RUN npm run build
+
+# Define um valor padrão para PORT se não estiver definido
+ARG PORT=3004
+
+# Expõe a porta que a aplicação irá rodar
+EXPOSE ${PORT}
+
+# Comando para iniciar a aplicação
+CMD [ "npm", "start" ]

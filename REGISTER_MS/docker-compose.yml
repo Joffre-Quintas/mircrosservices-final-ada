@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  rabbitmq:
+    container_name: rabbitmq-projeto-ada
+    image: rabbitmq:3-management-alpine
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rmq-mircrosservices-final-ada-data:/var/lib/rabbitmq/
+      - rmq-mircrosservices-final-log:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: 'admin'
+      RABBITMQ_DEFAULT_PASS: 'admin'
+      RABBITMQ_DEFAULT_VHOST: 'chat'
+
+  app:
+    container_name: regiter-ms
+    build:
+      context: .
+      dockerfile: dockerfile
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3004:3004"
+    env_file:
+      - .env
+
+volumes:
+  rmq-mircrosservices-final-ada-data:
+  rmq-mircrosservices-final-log:
+
+

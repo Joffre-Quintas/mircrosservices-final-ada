@@ -5,6 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/index.ts",
+    "build": "tsc",
+    "start": "node ./dist/src/index.js",
+    "docker:build": "clear; npm run build && docker-compose up -d",
+    "docker:logs": "rm -rf ./dist && docker-compose logs -f",
     "lint": "eslint src --ext js,ts,tsx",
     "test": "jest",
     "test:watch": "jest --watch",
