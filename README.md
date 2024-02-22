@@ -71,7 +71,7 @@ npm i
 
 #### ☑️ Feature/1: API Gateway
 ```bash
-npm
+npm run dev
 ```
 
 #### ☑️ Feature/3: Auth Service
@@ -81,7 +81,7 @@ npm run dev
 
 #### ☑️ Feature/4: Register Service
 ```bash
-npm
+npm 
 ```
 
 #### ☑️ Feature/5: Order Service
