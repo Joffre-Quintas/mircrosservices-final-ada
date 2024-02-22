@@ -9,7 +9,7 @@ function userData(): TCreateUserDTO {
     name: 'Eren Yeager',
     email: 'tita@eren.yeager',
     cpf: '12345678900',
-    addressId: '65d250f8b67fba36f22b0b9f',
+    addressId: '5c61ebdb-5d96-423d-8c89-06688f58e4e5',
     password: 'O_mundo_e_um_lugar_cruel'
   }
 }
@@ -47,7 +47,7 @@ describe('Create User Flux', () => {
     const res = await request(app).post('/create-user').send(reqMock.body)
 
     expect(res.status).toBe(EHttpStatus.CONFLICT)
-    expect(res.body.message).toBe('CPF and Email are already in use')
+    expect(res.body.data.message).toBe('CPF and Email are already in use')
   })
 
   it(`should return a "${EHttpStatus.BAD_REQUEST}" status code if any required field is missing`, async () => {
@@ -72,8 +72,9 @@ describe('Create User Flux', () => {
         }
       })
 
+    console.log(res.body.data)
     expect(res.status).toBe(EHttpStatus.BAD_REQUEST)
-    expect(res.body.message).toBe('Password and Confirm Password must be the same.')
+    expect(res.body.data.message).toBe('Password and Confirm Password must be the same.')
   })
 
   it(`should return a "${EHttpStatus.SERVER_ERROR}" status code if the server is down`, async () => {
@@ -82,6 +83,6 @@ describe('Create User Flux', () => {
     const res = await request(app).post('/create-user').send(reqMock.body)
 
     expect(res.status).toBe(EHttpStatus.SERVER_ERROR)
-    expect(res.body).toHaveProperty('error')
+    expect(res.body.data).toHaveProperty('message')
   })
 })
