@@ -14,7 +14,6 @@ class EmailNotificationService {
 
     private async sendMail(queue: string, email: string) {
         const emailToSend = templates[queue as keyof typeof templates];
-        console.log('Email to send:', emailToSend, queue, email);
         const info = await this.mailService.getTransporter().sendMail(emailToSend)
         console.log('Preview URL: ' + info)
            
@@ -23,9 +22,7 @@ class EmailNotificationService {
     private receiveAndProcessMessages() {
         this.connectionRabbitmq.receiveMessages((message: any) => {
             const { queue, email } = JSON.parse(message.content.toString());
-            console.log('Message:', JSON.parse(message.content.toString()));
             this.sendMail(queue, email);
-            console.log('Email sent to:', email)
         });
     }
 
