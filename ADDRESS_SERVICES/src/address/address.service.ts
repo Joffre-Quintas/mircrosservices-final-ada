@@ -1,8 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { SessionCreateDTO } from './dto/session-create.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import axios from 'axios'
-import { error } from 'console';
+
 
 @Injectable()
 export class AddressService {
@@ -17,7 +17,7 @@ export class AddressService {
       },
     });
 
-    console.log(existingAddress)
+   
     if (existingAddress) {
       return existingAddress   
     }
@@ -55,4 +55,3 @@ export class AddressService {
   }
 }
 
-//36ee6b5d-4ae4-435d-98a7-7ed76ccfc6b8

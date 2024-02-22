@@ -58,6 +58,15 @@ Esdras Aguilar ---> <https://github.com/esdrasac>
  <br /> <br />
 
  <!-- Joice -->
+ <a href="https://github.com/joicescripts">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/117463401?v=4" width="40px;" alt=""/>
+ <br />
+ <sub><b>Joice Martins</b></sub></a> <a href="https://github.com/joicescripts" title="GitHub">🚀</a>
+ <br /> <br />
 
  <!-- Rodrigo -->
-
+<a href="https://github.com/Rodrigobuenow">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/117463401?v=4" width="40px;" alt=""/>
+ <br />
+ <sub><b>Rodrigo Bueno</b></sub></a> <a href="https://github.com/Rodrigobuenow" title="GitHub">🚀</a>
+ <br /> <br />
