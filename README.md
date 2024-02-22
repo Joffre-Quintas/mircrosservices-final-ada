@@ -52,7 +52,9 @@ Trello ---> <https://trello.com/b/wRS0Exxu/ada-food>
 
 ## 🛠️ Tecnologias
 #### As seguintes ferramentas foram usadas na construção do projeto:
-- primeira
+- MongoDB
+- RabbitMQ
+- NestJS
 
 ## 🛠️ Instalação
 
