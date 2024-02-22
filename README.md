@@ -12,6 +12,7 @@ SERVICE;</li>
 <li>Address Service: Nele será possível buscar um endereço e salvar na tabela(ou collection) de usuários, no respectivo usuário que estiver solicitando a busca;</li>
 <li>Register Service: Serviço responsável por criar usuários no banco de dados. Ao criar um usuário é necessário enviar uma notificação para confirmação de email através do "Notification Service". O usuário criado deve conter as seguintes informações:
 </li>
+
 - id
 - Name
 - email
@@ -24,6 +25,7 @@ SERVICE;</li>
 - country
 
 <li>Order Service: Nele será possível realizar um pedido e salvá-lo no banco de dados em uma tabela(ou collection) especifica, contendo:</li>
+
 - id
 - user_id
 - description
