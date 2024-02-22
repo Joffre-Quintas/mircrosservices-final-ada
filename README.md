@@ -48,7 +48,12 @@ Trello ---> <https://trello.com/b/wRS0Exxu/ada-food>
 #### colocar aqui
 
 ## ✅ Features
-#### ☑️aqui
+#### ☑️ Feature/1: API Gateway
+#### ☑️ Feature/3: Auth Service
+#### ☑️ Feature/4: Register Service
+#### ☑️ Feature/5: Order Service
+#### ☑️ Feature/6: Notification Service
+#### ☑️ Feature/7: Address Service
 
 ## 🛠️ Tecnologias
 #### As seguintes ferramentas foram usadas na construção do projeto:
@@ -64,8 +69,34 @@ npm i
 
 ## 🏃 Para rodar os Testes
 
+#### ☑️ Feature/1: API Gateway
 ```bash
 npm
+```
+
+#### ☑️ Feature/3: Auth Service
+```bash
+npm
+```
+
+#### ☑️ Feature/4: Register Service
+```bash
+npm
+```
+
+#### ☑️ Feature/5: Order Service
+```bash
+npm
+```
+
+#### ☑️ Feature/6: Notification Service
+```bash
+npm
+```
+
+#### ☑️ Feature/7: Address Service
+```bash
+npm run start:dev
 ```
 
 ## 👨🏻‍🏫 Professor
