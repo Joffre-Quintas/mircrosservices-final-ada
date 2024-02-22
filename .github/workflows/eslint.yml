@@ -11,10 +11,10 @@ name: ESLint
 
 on:
   push:
-    branches: [ "feat/RegisterMS" ]
+    branches: [ "hml" ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "feat/RegisterMS" ]
+    branches: [ "hml" ]
   schedule:
     - cron: '18 9 * * 4'
 
