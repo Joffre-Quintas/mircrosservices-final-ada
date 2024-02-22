@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import HandleAuthService from '../handlers/HandlerAuthSession'
-import { token } from '../schemas/verify.Session.schema'
+import { verifySessionSchema } from '../schemas/verify.Session.schema'
 import { createSessionSchema } from '../schemas/createSession.schema'
 
 import validations from '../middlewares/validation'
