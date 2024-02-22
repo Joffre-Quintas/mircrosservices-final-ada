@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "7c15dbb0-a92b-48fb-aa85-90549039e76c",
 		"name": "ADA",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24063024"
 	},
 	"item": [
@@ -100,14 +100,24 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\n{\n    \"data\" : {\n      \"name\": \"Mr Kuro\",\n      \"email\": \"mr@kuro.mk\",\n      \"cpf\": \"12345678910\",\n      \"streetNumber\": 22,\n      \"neighborhood\": \"Hokkaido District\",\n      \"city\": \"HoKkaido\",\n      \"state\": \"Hokkaido Federation\",\n      \"country\": \"Japan\",\n      \"password\": \"sdf\",\n      \"confirmPassword\": \"sdf\"\n    }\n}",
+									"raw": "\n{\n    \"data\" : {\n      \"name\": \"Mr Kuro\",\n      \"email\": \"mr@kuro.mk\",\n      \"cpf\": \"43215678910\",\n      \"addressId\": \"5c61ebdb-5d96-423d-8c89-06688f58e4e5\",\n      \"password\": \"sdf\",\n      \"confirmPassword\": \"sdf\"\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "http://localhost:3004/create-user"
+								"url": {
+									"raw": "http://localhost:3004/create-user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3004",
+									"path": [
+										"create-user"
+									]
+								}
 							},
 							"response": []
 						},
@@ -125,7 +135,48 @@
 										}
 									}
 								},
-								"url": "http://localhost:3004/delete-all-users"
+								"url": {
+									"raw": "http://localhost:3004/delete-all-users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3004",
+									"path": [
+										"delete-all-users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "find all users",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"rootSecret\": \"delete-sem-where\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3004/find-all-users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3004",
+									"path": [
+										"find-all-users"
+									]
+								}
 							},
 							"response": []
 						}
