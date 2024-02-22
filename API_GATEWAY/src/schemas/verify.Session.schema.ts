@@ -1,9 +1,9 @@
 import * as yup from 'yup'
 
-const verifySessionSchema = yup.object({
+const token = yup.object({
     token: yup.string().required()
 })
 
-type TVerifySession = yup.InferType<typeof verifySessionSchema>
+type TToken = yup.InferType<typeof token>
 
-export { verifySessionSchema, TVerifySession }
+export { token, TToken }

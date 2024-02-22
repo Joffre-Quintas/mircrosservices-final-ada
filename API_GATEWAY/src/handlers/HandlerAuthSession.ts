@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { Request, Response } from 'express'
 import 'dotenv/config'
-//import { TToken } from '../schemas/verify.Session.schema'
+import { TToken } from '../schemas/verify.Session.schema'
+
 import { TCreateSession } from '../schemas/createSession.schema'
 
 class HandlerAuthService {
@@ -20,12 +21,10 @@ class HandlerAuthService {
     }
 
     static verifySession = async (req: Request, res: Response) => {
-        //const dataBody: TToken = req.body
+        const dataBody: TToken = req.body
 
         try {
-            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/verification-session`
-           // , dataBody.token
-            )
+            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/verify-session`, dataBody.token)
 
             res.status(200).json(data)
         } catch (error: any) {
