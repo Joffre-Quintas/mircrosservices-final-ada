@@ -26,25 +26,22 @@ export class ServiceCreateUser implements IServiceCreateUser {
 
     const newUser: TUser = await this.Repository.createUser({ ...data, password: hashedPassword })
 
-    const transformedUser: TCreateUserResponse = {
-      message: 'Successfully created user'
-    }
     console.log('ServiceCreateUser.execute -> created')
 
-    console.log('ServiceCreateUser.execute -> publishing to queue')
     const queueData: TqueueDTO = {
-      exchange: process.env.RABBITMQ_EXCHANGE,
-      routingKey: process.env.RABBITMQ_ROUTING_KEY,
-      message: JSON.stringify({
-        id: newUser.id,
+      queue: process.env.RABBITMQ_QUEUE!,
+      message: {
+        userId: newUser.id,
         name: newUser.name,
         email: newUser.email,
-        message: 'Successfully created user'
-      })
+        queue: 'order'
+      }
     }
-    await this.queueService.publish(queueData)
-    console.log('ServiceCreateUser.execute -> published to queue')
+    this.queueService.publish(queueData)
 
-    return transformedUser
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, addressId, id, ...rest } = newUser
+
+    return { data: { ...rest, message: 'User created' } }
   }
 }

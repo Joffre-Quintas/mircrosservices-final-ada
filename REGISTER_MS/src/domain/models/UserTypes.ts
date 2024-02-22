@@ -28,8 +28,7 @@ export type TAddress = {
 export type TCreateUserDTO = Omit<TUser, 'id' | 'createdAt' | 'updatedAt' | 'address'> & { confirmPassword?: string }
 
 export type TCreateUserResponse = {
-  // data: Pick<TUser, 'name' | 'email' | 'cpf' | 'createdAt' | 'updatedAt'>
-  message: string
+  data: Omit<TUser, 'password' | 'addressId' | 'id'> & { message: string }
 }
 
 export type TFindAllUsersResponse = {
@@ -37,29 +36,30 @@ export type TFindAllUsersResponse = {
 }
 
 export type TqueueDTO = {
-  exchange?: string
-  routingKey?: string
-  message?: string
+  queue: string
+  message: {
+    userId: string
+    name: string
+    email: string
+    queue: string
+  }
 }
 
 // services
 export interface IServiceCreateUser {
   execute: (data: TCreateUserDTO) => Promise<TCreateUserResponse>
 }
-
 export interface IServiceFindAllUsers {
   execute: () => Promise<TFindAllUsersResponse>
 }
-
 export interface IServiceDeleteAllUsers {
   execute: () => Promise<void>
 }
-
 export interface IQueueService {
-  publish: (data: TqueueDTO) => Promise<void>
+  publish: (data: TqueueDTO) => void
 }
 
-// repositories
+// repository
 export interface IRepository {
   createUser: (data: TCreateUserDTO) => Promise<TUser>
   findAllUsers: () => Promise<TUser[]>

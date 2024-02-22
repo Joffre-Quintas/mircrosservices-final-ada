@@ -30,6 +30,7 @@ export class Repository implements IRepository {
     // creating user
     console.log('Repository.createUser -> creating')
     const response = await this.prisma.user.create({ data })
+    
     if (!response) {
       throw response
     }

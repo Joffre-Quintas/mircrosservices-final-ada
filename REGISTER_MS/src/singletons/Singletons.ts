@@ -13,13 +13,17 @@ import { HandlerFindAllUsers } from '../adapters/handlers/HandlerFindAllUsers'
 
 export class Singleton {
   public static instance: Singleton
+
+  // Adapters
   public queueService: RabbitMQueueService
   public Repository: IRepository
 
+  // Domain Services
   public ServiceCreateUser: IServiceCreateUser
   public ServiceFindAllUsers: IServiceFindAllUsers
   public ServiceDeleteAllUsers: IServiceDeleteAllUsers
 
+  // Handlers
   public HandlerCreateUser: HandlerCreateUser
   public HandlerDeleteAllUsers: HandlerDeleteAllUsers
   public HandlerFindAllUsers: HandlerFindAllUsers
