@@ -7,7 +7,7 @@ const jsonResponse = {}
 const reqMock = {
   body: {
     data: {
-      rootSecret: process.env.DELETE_SECRET
+      rootSecret: process.env.ROOT_SECRET
     }
   }
 }
