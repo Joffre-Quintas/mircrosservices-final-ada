@@ -6,11 +6,14 @@ function mockDBResponse(): TUser {
     addressId: '1',
     address: {
       id: '1',
-      streetNumber: '1',
+      street: 'Wall Maria',
+      number: '1',
       neighborhood: 'Shiganshina',
       city: 'Maria',
       state: 'Paradis',
-      country: 'Japan'
+      country: 'Japan',
+      cep: '12345678',
+      complement: 'House 1'
     },
     cpf: '12345678901',
     email: 'tita@eren.yeager',

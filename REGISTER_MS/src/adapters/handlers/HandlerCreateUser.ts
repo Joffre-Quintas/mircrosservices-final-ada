@@ -21,12 +21,18 @@ export class HandlerCreateUser {
     } catch (error) {
       if (error instanceof UserException) {
         const { message, status, name } = error
-        return res.status(status).json({ status, message, name })
+        return res.status(status).json({ data: { status, message, name } })
       } else if (error instanceof Error) {
         const serverError = new ServerErrorException()
         return error.message
-          ? res.status(serverError.status).json({ error })
-          : res.status(serverError.status).json({ serverError })
+          ? res.status(serverError.status).json({
+              data: {
+                status: serverError.status,
+                message: error.message,
+                name: serverError.name
+              }
+            })
+          : res.status(serverError.status).json({ data: serverError })
       }
     }
   }
