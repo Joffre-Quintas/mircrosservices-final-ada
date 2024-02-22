@@ -42,7 +42,7 @@ npm
 
 #### ☑️ Feature/3: Auth Service
 ```bash
-npm
+npm run dev
 ```
 
 #### ☑️ Feature/4: Register Service
@@ -52,7 +52,7 @@ npm
 
 #### ☑️ Feature/5: Order Service
 ```bash
-npm
+npm run dev
 ```
 
 #### ☑️ Feature/6: Notification Service
