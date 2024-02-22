@@ -11,7 +11,6 @@ export class Repository implements IRepository {
 
   // User Table Methods
   public async createUser(data: TCreateUserDTO): Promise<TUser> {
-    // finding existing user
     console.log('Repository.createUser -> finding existing user')
     const ifCPF = await this.findUserByCPF(data.cpf).catch(() => false)
     const ifEmail = await this.findUserByEmail(data.email).catch(() => false)
@@ -27,7 +26,6 @@ export class Repository implements IRepository {
     // validating address
     await this.findAddressById(data.addressId)
 
-    // creating user
     console.log('Repository.createUser -> creating')
     const response = await this.prisma.user.create({ data })
     

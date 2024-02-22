@@ -24,16 +24,8 @@ export type TAddress = {
   complement: string
 }
 
-// user DTOs and responses
+// DTOs and responses
 export type TCreateUserDTO = Omit<TUser, 'id' | 'createdAt' | 'updatedAt' | 'address'> & { confirmPassword?: string }
-
-export type TCreateUserResponse = {
-  data: Omit<TUser, 'password' | 'addressId' | 'id'> & { message: string }
-}
-
-export type TFindAllUsersResponse = {
-  data: Omit<TUser, 'password' | 'addressId'>[]
-}
 
 export type TqueueDTO = {
   queue: string
@@ -43,6 +35,14 @@ export type TqueueDTO = {
     email: string
     queue: string
   }
+}
+
+export type TCreateUserResponse = {
+  data: Omit<TUser, 'password' | 'addressId' | 'id'> & { message: string }
+}
+
+export type TFindAllUsersResponse = {
+  data: Omit<TUser, 'password' | 'addressId'>[]
 }
 
 // services
