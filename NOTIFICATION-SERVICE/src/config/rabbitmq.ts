@@ -1,4 +1,5 @@
 import amqplib, { Channel, Connection } from 'amqplib/callback_api'
+import 'dotenv'
 
 class ConnectionRabbitmq {
    static connection: Connection
@@ -6,7 +7,7 @@ class ConnectionRabbitmq {
 
     receiveMessages = async (cb:any) => {
         try {
-            amqplib.connect('amqp://127.0.0.1', (err, connection) => {
+            amqplib.connect('amqps://pyqsndee:jl6A3s42R8KdwVpsqUT9qONpt9YDkrAO@jackal.rmq.cloudamqp.com/pyqsndee', (err, connection) => {
                 if(err) {
                     throw err
                 }
