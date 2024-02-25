@@ -14,8 +14,8 @@ class EmailNotificationService {
 
     private async sendMail(queue: string, email: string) {
         const emailToSend = templates[queue as keyof typeof templates];
-        const info = await this.mailService.getTransporter().sendMail(emailToSend)
-        console.log('Preview URL: ' + info)
+        await this.mailService.getTransporter().sendMail(emailToSend)
+        console.log('email enviado com sucesso!')
            
     }
 

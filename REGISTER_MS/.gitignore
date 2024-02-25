@@ -1,4 +1,5 @@
 node_modules
 databaseMock
 coverage/
+dist/
 .env

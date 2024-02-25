@@ -1,25 +1,23 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { SessionCreateDTO } from './dto/session-create.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import axios from 'axios'
-
+import axios from 'axios';
 
 @Injectable()
 export class AddressService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getAddressByCep(cep: string, number: string, complement: string) {
+  async getAddress(cep: string, number: string, complement: string) {
     const existingAddress = await this.prisma.address.findFirst({
       where: {
         cep: cep,
         number: number,
-        complement: complement
+        complement: complement,
       },
     });
 
-   
     if (existingAddress) {
-      return existingAddress   
+      return existingAddress;
     }
 
     try {
@@ -30,28 +28,31 @@ export class AddressService {
     }
   }
 
-  async createAddress({ cep, country = 'Brasil', number, complement }: SessionCreateDTO) {
-    const additionalInfo = await this.getAddressByCep(cep, number, complement);
-    
-    if (additionalInfo["id"]) {
-      return {id:additionalInfo.id}
-    }
+  async createAddress({
+    cep,
+    country = 'Brasil',
+    number,
+    complement,
+  }: SessionCreateDTO) {
+    const additionalInfo = await this.getAddress(cep, number, complement);
 
+    if (additionalInfo['id']) {
+      return { id: additionalInfo.id };
+    }
 
     const newAddress = await this.prisma.address.create({
       data: {
         cep,
         street: additionalInfo.logradouro,
         city: additionalInfo.localidade,
-        neighborhood: additionalInfo.bairro,      
+        neighborhood: additionalInfo.bairro,
         state: additionalInfo.uf,
         country,
         number,
-        complement      
+        complement,
       },
     });
 
     return newAddress;
   }
 }
-

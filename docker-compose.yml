@@ -1,0 +1,73 @@
+version: '3'
+services:
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management-alpine
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rmq-mircrosservices-final-ada-data:/var/lib/rabbitmq
+      - rmq-mircrosservices-final-ada-log:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: 'admin'
+      RABBITMQ_DEFAULT_PASS: 'admin'
+      RABBITMQ_DEFAULT_VHOST: 'chat'
+
+  gateway:
+    container_name: api_gateway
+    image: api_gateway_image
+    build: ./API_GATEWAY
+    ports:
+      - "3001:3001"
+    env_file:
+      - API_GATEWAY/.env
+
+  address_ms:
+    container_name: address_ms
+    image: address_ms_image
+    build: ./ADDRESS_SERVICES
+    ports:
+      - "3003:3003"
+    env_file:
+      - ADDRESS_SERVICES/.env
+
+  auth_ms:
+    container_name: auth_ms
+    image: auth_ms_image
+    build: ./AUTH_SERVICES
+    ports:
+      - "3002:3002"
+    env_file:
+      - AUTH_SERVICES/.env
+
+  # order_ms:
+  #   container_name: order_ms
+  #   image: order_ms_image
+  #   build: ./ORDER_SERVICE
+  #   ports:
+  #     - "3003:3003"
+  #   env_file:
+  #     - ORDER_SERVICE/.env
+
+  register_ms:
+    container_name: register_ms
+    image: register_ms_image
+    build: ./REGISTER_MS
+    ports:
+      - "3004:3004"
+    env_file:
+      - REGISTER_MS/.env
+
+  notification_ms:
+    container_name: notification_ms
+    image: notification_ms_image
+    build: ./NOTIFICATION-SERVICE
+    env_file:
+      - NOTIFICATION-SERVICE/.env
+
+volumes:
+  rmq-mircrosservices-final-ada-data:
+  rmq-mircrosservices-final-ada-log:
