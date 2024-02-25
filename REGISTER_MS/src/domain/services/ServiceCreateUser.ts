@@ -1,12 +1,4 @@
-import {
-  IQueueService,
-  IServiceCreateUser,
-  IRepository,
-  TCreateUserDTO,
-  TCreateUserResponse,
-  TUser,
-  TqueueDTO
-} from '../models/UserTypes'
+import { IQueueService, IServiceCreateUser, IRepository, TCreateUserDTO, TUser, TqueueDTO } from '../models/UserTypes'
 import bcrypt from 'bcrypt'
 
 export class ServiceCreateUser implements IServiceCreateUser {
@@ -18,7 +10,7 @@ export class ServiceCreateUser implements IServiceCreateUser {
     this.queueService = queueService
   }
 
-  public async execute(data: TCreateUserDTO): Promise<TCreateUserResponse> {
+  public async execute(data: TCreateUserDTO): Promise<TUser> {
     console.log('ServiceCreateUser.execute -> creating')
 
     const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS!))
@@ -39,9 +31,6 @@ export class ServiceCreateUser implements IServiceCreateUser {
     }
     this.queueService.publish(queueData)
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, addressId, id, ...rest } = newUser
-
-    return { data: { ...rest, message: 'User created' } }
+    return newUser
   }
 }
