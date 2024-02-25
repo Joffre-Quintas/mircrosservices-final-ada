@@ -1,4 +1,5 @@
 # 🍕 ADA FOOD
+
 ### Projeto de microsserviço desenvolvido durante curso da Ada Tech
 
 ## 📚 Descrição
@@ -45,18 +46,25 @@ suficiente;</p>
 Trello ---> <https://trello.com/b/wRS0Exxu/ada-food>
 
 ## ✅ Features
+
 #### ☑️ Feature/1: API Gateway
+
 #### ☑️ Feature/3: Auth Service
+
 #### ☑️ Feature/4: Register Service
+
 #### ☑️ Feature/5: Order Service
+
 #### ☑️ Feature/6: Notification Service
+
 #### ☑️ Feature/7: Address Service
 
 ## 🛠️ Tecnologias
+
 #### As seguintes ferramentas foram usadas na construção do projeto:
+
 - MongoDB
 - RabbitMQ
-- Docker
 - NestJS
 - TypeScript
 - Nodemail
@@ -64,52 +72,65 @@ Trello ---> <https://trello.com/b/wRS0Exxu/ada-food>
 
 ## 🏃 Para rodar os Serviços
 
-- Adicione o arquivo **.env** aos microsserviços
+-Os arquivos .env foram deixados expostos para a avaliçao do professor.
+-Rodar primeiro o notification_service. Acessar a pasta e executar npm run dev.
+-Para todos os serviços restantes (exceto o address_service), acessar a pasta e rodar o comando npm run dev
+-Para o address_services: acessar a pasta e rodar o comando npm start:dev
 
-- Suba os Conteiners:
-    - Vá até a pasta raiz, onde estão todos os microserviços e rode o comando  **docker-compose up**. Verifique se todos os containers subiram.
-    Caso eles não subam, tente rodar o comando novamente ou subir um container de cada vez.
-        - Observação: o container **notification service** deve subir depois do rabbitmq, para que não aja erro de conexão
-        - Para facilitar a vizualização dos container, baixe a **extensão Docker** no seu VScode
+## Para acessar o RabbitMQ
 
-- Starte os microsserviços:
+https://jackal.rmq.cloudamqp.com/#/queues
+user : pyqsndee
+pass: ZIAx7JxzftPP_5YtyAihRJRD9a-lvgZ-
+
+## Para conseguir acessar Ethereal (Visualizador de email) :
+
+Link: https://ethereal.email/messages
+user: kathleen.jacobs@ethereal.email
+senha: VYAnaKFu6kQtfsbJE6
 
 #### ☑️ Feature/1: API Gateway
+
 ```bash
 npm run dev
 ```
 
 #### ☑️ Feature/3: Auth Service
+
 ```bash
 npm run dev
 ```
 
 #### ☑️ Feature/4: Register Service
+
 ```bash
 npm run dev
 ```
 
 #### ☑️ Feature/5: Order Service
+
 ```bash
 npm run dev
 ```
 
 #### ☑️ Feature/6: Notification Service
+
 ```bash
 npm run dev
 ```
 
 #### ☑️ Feature/7: Address Service
+
 ```bash
 npm run start:dev
 ```
-
 
 ## 👨🏻‍🏫 Professor
 
 Esdras Aguilar ---> <https://github.com/esdrasac>
 
 ## 👥 Autores
+
 <!-- Anderson -->
 <a href="https://github.com/Mr-Kuro">
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/100809180?v=4" width="40px;" alt=""/>
