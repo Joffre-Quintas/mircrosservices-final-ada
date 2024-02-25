@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt'
 import userModel from '../models/userModel'
 import CustomException from '../exceptions'
 
-
 class CreateSessionUsecases {
     static async createSession(user: TCreateSessionSchema) {
         const data = await userModel.findOne({ email: user.email })
@@ -20,8 +19,8 @@ class CreateSessionUsecases {
         }
 
         const token = jwt.sign(user, process.env.SECRET as string, {
-            expiresIn: 1 * 60
-            })
+            expiresIn: 2 * 60
+        })
 
         return token
     }

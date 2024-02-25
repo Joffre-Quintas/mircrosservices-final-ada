@@ -47,7 +47,7 @@ export type TFindAllUsersResponse = {
 
 // services
 export interface IServiceCreateUser {
-  execute: (data: TCreateUserDTO) => Promise<TCreateUserResponse>
+  execute: (data: TCreateUserDTO) => Promise<TUser>
 }
 export interface IServiceFindAllUsers {
   execute: () => Promise<TFindAllUsersResponse>

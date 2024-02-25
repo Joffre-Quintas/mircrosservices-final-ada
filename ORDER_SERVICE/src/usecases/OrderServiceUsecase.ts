@@ -1,3 +1,4 @@
+import PayloadRMQDTO from '../DTO/PayloadRMQ'
 import CustomException from '../exceptions/CustoException'
 import prisma from '../prisma'
 import { TNewOrder } from '../schemas/newOrderSchema'
@@ -13,15 +14,14 @@ class OrderServiceUsecase {
             throw new CustomException(404, 'User not found!')
         }
 
-        await prisma.orders.create({ data: order }).then(() => {
-            Rabbitmq.publisherInQueueOrders(
-                process.env.ROUTING_KEY as string,
-                JSON.stringify({ userId: user.id, name: user.name, email: user.email })
-            )
-        })
+        await prisma.orders.create({ data: order })
+
+        Rabbitmq.publisherInQueueNotification(
+            JSON.stringify(new PayloadRMQDTO(user.id, user.name, user.email, order.description, 'order'))
+        )
 
         return { message: 'Order registered!' }
     }
 }
 
-export { OrderServiceUsecase }
+export default OrderServiceUsecase

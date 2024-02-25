@@ -3,7 +3,7 @@ import * as yup from 'yup'
 
 const validations = (schema: yup.AnyObjectSchema) => async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await schema.validate(req.body.data)
+    await schema.validate(req.body)
     next()
   } catch (error) {
     if (error instanceof yup.ValidationError) {

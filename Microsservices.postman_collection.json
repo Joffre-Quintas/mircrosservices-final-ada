@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "fe20669e-5775-4519-a938-50f6f0ff4fb6",
+		"name": "Microsservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25205892"
+	},
+	"item": [
+		{
+			"name": "API_GATEWAY",
+			"item": [
+				{
+					"name": "CreateSession",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"teste@email.com\",\n    \"password\":\"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/create-session",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"create-session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NewOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"048cf96b-20b1-47c3-ae2f-d87ba6e90151\",\n    \"description\":\"teste queue order\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/new-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"new-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifySession",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM2YTIyYjhiLTRmOGUtNGRlMi05NzNlLTZjZWZmMDg1NjlhOSIsIm5hbWUiOiJHYWJyaWVsIFBlcmVpcmEiLCJjcGYiOiIxMjQzNTY4NzkxMSIsImVtYWlsIjoidGVzdGVAZW1haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkSFBPME5mNkdSakRnYjRjbllHa05idXJYdlNUYW5vcFM4T3lnWXpxSzA1SzZEWldzZEx2TnUiLCJhZGRyZXNzSWQiOiJhN2Q1YmFjZC1hY2RjLTQ4NGItODliMC1kMTM0NTE3MzMyOGMiLCJpYXQiOjE3MDg1NjcwNjl9.q0eVx0-bztMdL6BQMuNQbF432GQdKv_xfDgFRzgbC8k",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzA4ODk0MTI4LCJleHAiOjE3MDg4OTQyNDh9.RP45byT6hBtGGKGRaiyc-W9UIF1NlNJBU2heWq2M0jA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/verify-session",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"verify-session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cep\": \"59149003\",\n    \"number\": \"218\",\n    \"complement\": \"Lacida Coiffeue\",\n    \"name\": \"Gabriel Pereira\",\n    \"email\": \"teste@email.com\",\n    \"cpf\": \"12435687911\",\n    \"password\": \"123456\",\n    \"confirmPassword\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

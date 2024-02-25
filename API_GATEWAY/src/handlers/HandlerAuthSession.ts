@@ -24,7 +24,7 @@ class HandlerAuthService {
         const dataBody: TToken = req.body
 
         try {
-            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/verification-session`, dataBody.token)
+            const { data } = await axios.post(`${process.env.AUTH_SERVICE_URL}/verification-session`, dataBody)
 
             res.status(200).json(data)
         } catch (error: any) {

@@ -7,7 +7,9 @@ class Rabbitmq {
 
     static connectRabbitMQ = async () => {
         try {
-            Rabbitmq.connection = await amqp.connect('amqp://localhost')
+            Rabbitmq.connection = await amqp.connect(
+                'amqps://pyqsndee:ZIAx7JxzftPP_5YtyAihRJRD9a-lvgZ-@jackal.rmq.cloudamqp.com/pyqsndee'
+            )
             Rabbitmq.channel = await Rabbitmq.connection.createChannel()
 
             console.log('Conectado ao RabbitMQ')
@@ -16,13 +18,9 @@ class Rabbitmq {
         }
     }
 
-    static publisherInQueueOrders = async (channel: string, message: string) => {
+    static publisherInQueueNotification = (message: string) => {
         const rbChannel = Rabbitmq.channel
-        try {
-            rbChannel.publish(process.env.EXCHANGE_NAME as string, channel, Buffer.from(message))
-        } catch (error) {
-            console.log()
-        }
+        rbChannel.sendToQueue(process.env.QUEUE_NAME as string, Buffer.from(message))
     }
 }
 
