@@ -26,7 +26,7 @@ export class ServiceCreateUser implements IServiceCreateUser {
         userId: newUser.id,
         name: newUser.name,
         email: newUser.email,
-        queue: 'order'
+        queue: 'register'
       }
     }
     this.queueService.publish(queueData)
