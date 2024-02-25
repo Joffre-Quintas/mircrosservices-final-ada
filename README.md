@@ -89,6 +89,10 @@ Link: https://ethereal.email/messages
 user: kathleen.jacobs@ethereal.email
 senha: VYAnaKFu6kQtfsbJE6
 
+## Para testar o projeto cURL:
+
+-Importar o arquivo cURL na raiz do projeto.
+
 #### ☑️ Feature/1: API Gateway
 
 ```bash
