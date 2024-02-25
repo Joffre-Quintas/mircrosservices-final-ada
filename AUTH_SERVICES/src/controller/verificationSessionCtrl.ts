@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import VerificationSessionUsecases from '../../src/usecases/verificationSessionUsecases';
+import VerificationSessionUsecases from '../usecases/verificationSessionUsecases';
 
 class VerificationSessionCtrl {
   static async verification(req: Request, res: Response) {

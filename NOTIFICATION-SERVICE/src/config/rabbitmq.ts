@@ -7,7 +7,14 @@ class ConnectionRabbitmq {
 
     receiveMessages = async (cb:any) => {
         try {
-            amqplib.connect('amqps://pyqsndee:jl6A3s42R8KdwVpsqUT9qONpt9YDkrAO@jackal.rmq.cloudamqp.com/pyqsndee', (err, connection) => {
+            amqplib.connect({
+                hostname: 'rabbitmq',
+                port: 5672,
+                username: 'admin',
+                password: 'admin',
+                vhost: 'chat'
+            
+            }, (err, connection) => {
                 if(err) {
                     throw err
                 }
@@ -15,8 +22,8 @@ class ConnectionRabbitmq {
                     if(err) {
                         throw err
                     }
-                    channel.assertQueue('notification-queue')
-                    channel.consume('notification-queue', cb, { noAck: true }
+                    channel.assertQueue('notification_queue')
+                    channel.consume('notification_queue', cb, { noAck: true }
                     )
                 })
             })

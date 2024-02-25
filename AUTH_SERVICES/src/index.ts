@@ -1,6 +1,6 @@
 import app from './app'
 import 'dotenv/config'
-import dbConnection from '../src/db/index'
+import dbConnection from './db/index'
 
 const port = process.env.PORT ?? 3002
 

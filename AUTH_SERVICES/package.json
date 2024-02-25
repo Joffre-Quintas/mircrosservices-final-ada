@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/index.js",
     "dev": "nodemon ./src/index.ts",
     "lint": "eslint src --ext js,ts,tsx",
     "test": "jest",
@@ -20,6 +23,7 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.11.17",
     "@types/mongoose": "^5.11.97",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
