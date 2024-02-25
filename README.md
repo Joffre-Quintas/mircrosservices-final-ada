@@ -56,12 +56,23 @@ Trello ---> <https://trello.com/b/wRS0Exxu/ada-food>
 #### As seguintes ferramentas foram usadas na construção do projeto:
 - MongoDB
 - RabbitMQ
+- Docker
 - NestJS
 - TypeScript
 - Nodemail
 - Ethereal
 
-## 🏃 Para rodar os Services
+## 🏃 Para rodar os Serviços
+
+- Adicione o arquivo **.env** aos microsserviços
+
+- Suba os Conteiners:
+    - Vá até a pasta raiz, onde estão todos os microserviços e rode o comando  **docker-compose up**. Verifique se todos os containers subiram.
+    Caso eles não subam, tente rodar o comando novamente ou subir um container de cada vez.
+        - Observação: o container **notification service** deve subir depois do rabbitmq, para que não aja erro de conexão
+        - Para facilitar a vizualização dos container, baixe a **extensão Docker** no seu VScode
+
+- Starte os microsserviços:
 
 #### ☑️ Feature/1: API Gateway
 ```bash
@@ -92,6 +103,8 @@ npm run dev
 ```bash
 npm run start:dev
 ```
+
+- Caso a conexão com o prisma não seja estabelecida em alguns serviços, rode o comando **npx prisma generate**
 
 ## 👨🏻‍🏫 Professor
 
