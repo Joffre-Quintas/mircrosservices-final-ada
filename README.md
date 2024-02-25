@@ -104,7 +104,6 @@ npm run dev
 npm run start:dev
 ```
 
-- Caso a conexão com o prisma não seja estabelecida em alguns serviços, rode o comando **npx prisma generate**
 
 ## 👨🏻‍🏫 Professor
 
