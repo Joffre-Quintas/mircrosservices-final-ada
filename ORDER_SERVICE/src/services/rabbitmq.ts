@@ -7,7 +7,7 @@ class Rabbitmq {
 
     static connectRabbitMQ = async () => {
         try {
-            Rabbitmq.connection = await amqp.connect('amqp://localhost')
+            Rabbitmq.connection = await amqp.connect('amqps://pyqsndee:ZIAx7JxzftPP_5YtyAihRJRD9a-lvgZ-@jackal.rmq.cloudamqp.com/pyqsndee')
             Rabbitmq.channel = await Rabbitmq.connection.createChannel()
 
             console.log('Conectado ao RabbitMQ')

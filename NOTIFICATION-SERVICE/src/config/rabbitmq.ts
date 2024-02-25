@@ -7,14 +7,7 @@ class ConnectionRabbitmq {
 
     receiveMessages = async (cb:any) => {
         try {
-            amqplib.connect({
-                hostname: 'rabbitmq',
-                port: 5672,
-                username: 'admin',
-                password: 'admin',
-                vhost: 'chat'
-            
-            }, (err, connection) => {
+            amqplib.connect('amqps://pyqsndee:ZIAx7JxzftPP_5YtyAihRJRD9a-lvgZ-@jackal.rmq.cloudamqp.com/pyqsndee', (err, connection) => {
                 if(err) {
                     throw err
                 }
