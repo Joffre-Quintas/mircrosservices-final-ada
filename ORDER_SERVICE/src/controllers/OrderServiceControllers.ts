@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { OrderServiceUsecase } from '../usecases/OrderServiceUsecase'
+import OrderServiceUsecase from '../usecases/OrderServiceUsecase'
 import { TNewOrder } from '../schemas/newOrderSchema'
 
 class OrderServiceController {
@@ -23,4 +23,4 @@ class OrderServiceController {
     }
 }
 
-export { OrderServiceController }
+export default OrderServiceController
